@@ -11,7 +11,26 @@ public class Input
         {
             try
             {
-                inputValue = int.Parse(Console.ReadLine());
+                inputValue = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                inputValue = -1;
+                continue;
+            }
+        }
+        return inputValue;
+    }
+    public static int InputMessageIntNoLine(string message)
+    {
+        Console.Write(message);
+        int inputValue = -1;
+
+        while (inputValue == -1)
+        {
+            try
+            {
+                inputValue = Convert.ToInt32(Console.ReadLine());
             }
             catch (Exception)
             {
@@ -28,8 +47,9 @@ public class Input
 
         while (inputValue == "")
         {
-            inputValue = Console.ReadLine();
+            inputValue = Convert.ToString(Console.ReadLine());
         }
         return inputValue;
     }
+
 }

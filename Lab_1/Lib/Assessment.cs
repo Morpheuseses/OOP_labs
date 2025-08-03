@@ -1,11 +1,5 @@
 namespace Lib;
 
-public enum GraduationLevel
-{
-    Bachelor = 1,
-    Master,
-    PhD
-}
 // test, Assessment, exam, final exam
 public class Assessment
 {
@@ -45,7 +39,6 @@ public class Assessment
                 throw new Exception($"{this.GetType().Name}'s duration should last more than 0 seconds and less than 6 hours");
         }
     }
-
     public Assessment()
     {
         this.Title = "None";
@@ -64,7 +57,7 @@ public class Assessment
         this.Date = other.Date;
         this.DurationSeconds = other.DurationSeconds;
     }
-    public void Init()
+    public virtual void Init()
     {
         Console.WriteLine($"Manual initialization of {this.GetType().Name}:");
         this.Title = Input.InputMessageString($"Write down the title of the {this.GetType().Name}:");
@@ -91,7 +84,7 @@ public class Assessment
         }
         this.DurationSeconds = Input.InputMessageInt($"Write down a duration of {this.GetType().Name}(must be more than 0 seconds less than 6 hours):");
     }
-    public void RandomInit()
+    public virtual void RandomInit()
     {
         var rand = new Random();
 
@@ -103,175 +96,36 @@ public class Assessment
         this.Title = subjects[rand.Next(subjects.Length)];
 
     }
+    protected virtual string GetFieldsString()
+    {
+        return "------------------------------------\n"
+                + $"Object Type: {this.GetType().Name}\n"
+                + $"Title: {this.Title}\n"
+                + $"Date: {this.Date}\n"
+                + $"Duration: {this.durationSeconds / 3600}h, {this.durationSeconds / 60 % 60}m, {this.durationSeconds % 60}s\n";
+    }
     public void Show()
     {
-        Console.WriteLine("------------------------------------");
-        Console.WriteLine($"Object Type: {this.GetType().Name}");
-        Console.WriteLine($"Title: {this.title}");
-        Console.WriteLine($"Date: {this.date}");
-        Console.WriteLine($"Duration: {this.durationSeconds / 3600}h, {this.durationSeconds / 60 % 60}m, {this.durationSeconds % 60}s");
+        Console.WriteLine(
+                        "------------------------------------\n"
+                        + $"Object Type: {this.GetType().Name}\n"
+                        + $"Title: {this.Title}\n"
+                        + $"Date: {this.Date}\n"
+                        + $"Duration: {this.durationSeconds / 3600}h, {this.durationSeconds / 60 % 60}m, {this.durationSeconds % 60}s\n"
+        );
+    }
+    public virtual void ShowVirt()
+    {
+        Console.WriteLine(GetFieldsString());
     }
     public override bool Equals(object? obj)
     {
-        if (obj is not Assessment other)
-            return false;
-        else
+        if (obj is Assessment other)
             return this.Date == other.Date && this.DurationSeconds == other.DurationSeconds && this.Title == other.Title;
+        return false;
     }
     public override int GetHashCode()
     {
         return HashCode.Combine(this.Date, this.Title, this.DurationSeconds);
-    }
-}
-
-public class Test : Assessment
-{
-    int numberOfQuestions;
-    public int NumberOfQuestions
-    {
-        get { return this.numberOfQuestions; }
-        set
-        {
-            if (value > 0)
-                this.numberOfQuestions = value;
-            else
-                throw new Exception($"{this.GetType().Name}'s number of questions should be more than 0");
-        }
-    }
-    public Test() : base()
-    {
-        this.NumberOfQuestions = 1;
-    }
-    public Test(string title, DateTime date, int duration, int numberOfquestions)
-        : base(title, date, duration)
-    {
-        this.NumberOfQuestions = numberOfquestions;
-    }
-    public Test(Test other) : base(other)
-    {
-        this.NumberOfQuestions = other.NumberOfQuestions;
-    }
-    public new void Init()
-    {
-        base.Init();
-        this.NumberOfQuestions = Input.InputMessageInt($"Write down the number of questions for {this.GetType().Name}");
-    }
-    public new void RandomInit()
-    {
-        base.RandomInit();
-        var rand = new Random();
-        this.NumberOfQuestions = rand.Next(1, 50);
-    }
-    public new void Show()
-    {
-        base.Show();
-        Console.WriteLine($"Number of questions: {this.numberOfQuestions}");
-    }
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(base.GetHashCode(), this.NumberOfQuestions);
-    }
-    public override bool Equals(object? obj)
-    {
-        if (obj is not Test other)
-            return false;
-        return base.Equals(obj) && this.NumberOfQuestions == other.NumberOfQuestions;
-    }
-}
-
-public class Exam : Test
-{
-    int numberOfWrittenQuestions;
-    public int NumberOfWrittenQuestions
-    {
-        get { return this.numberOfWrittenQuestions; }
-        set
-        {
-            if (value > 0 && value < this.NumberOfQuestions)
-                this.numberOfWrittenQuestions = value;
-            else
-                throw new Exception($"{this.GetType().Name}'s number of written questions should be more than 0 and less than number of all questions");
-        }
-    }
-    public Exam() : base()
-    {
-        this.NumberOfWrittenQuestions = 1;
-    }
-    public Exam(string title, DateTime date, int duration, int numberOfQuestions, int numberOfWrittenQuestions) : base(title, date, duration, numberOfQuestions)
-    {
-        this.NumberOfWrittenQuestions = numberOfWrittenQuestions;
-    }
-    public Exam(Exam other) : base(other)
-    {
-        this.NumberOfWrittenQuestions = other.NumberOfWrittenQuestions;
-    }
-    public new void Init()
-    {
-        base.Init();
-        this.NumberOfWrittenQuestions = Input.InputMessageInt("Write down the number of written questions");
-    }
-    public new void RandomInit()
-    {
-        base.RandomInit();
-        var rand = new Random();
-        this.NumberOfWrittenQuestions = rand.Next(1, this.NumberOfQuestions);
-    }
-    public new void Show()
-    {
-        base.Show();
-        Console.WriteLine($"Number of written questions: {this.NumberOfWrittenQuestions}");
-    }
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(base.GetHashCode(), this.NumberOfQuestions);
-    }
-    public override bool Equals(object? obj)
-    {
-        if (obj is not Exam other)
-            return false;
-        return base.Equals(obj) && this.NumberOfWrittenQuestions == other.NumberOfWrittenQuestions;
-    }
-}
-
-public class FinalExam : Exam
-{
-    public GraduationLevel GraduationLevel { get; set; }
-    public FinalExam() : base()
-    {
-        this.GraduationLevel = GraduationLevel.Bachelor;
-    }
-    public FinalExam(string title, DateTime date, int duration, int numberOfQuestions, int numberOfWrittenQuestions, GraduationLevel graduationLevel) : base(title, date, duration, numberOfQuestions, numberOfWrittenQuestions)
-    {
-        this.GraduationLevel = graduationLevel;
-    }
-    public FinalExam(FinalExam other) : base(other)
-    {
-        this.GraduationLevel = other.GraduationLevel;
-    }
-    public void Init(string title, DateTime date, int duration, int numberOfQuestions, int numberOfWrittenQuestions, GraduationLevel graduationLevel)
-    {
-        this.GraduationLevel = graduationLevel;
-    }
-    public new void RandomInit()
-    {
-        base.RandomInit();
-        var rand = new Random();
-        var values = GraduationLevel.GetValues(typeof(GraduationLevel));
-        this.GraduationLevel = (GraduationLevel)values.GetValue(rand.Next())!;
-    }
-    public new void Show()
-    {
-        base.Show();
-        Console.WriteLine($"Graduation Level");
-    }
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(base.GetHashCode(), this.GraduationLevel);
-    }
-    public override bool Equals(object? obj)
-    {
-        if (obj is not FinalExam other)
-            return false;
-        return base.Equals(obj) && this.GraduationLevel == other.GraduationLevel;
     }
 }
