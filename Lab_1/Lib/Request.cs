@@ -76,4 +76,44 @@ class Request
             }
         }
     }
+    public static void GetVirtAndNonVirtDiff(ref Assessment[]? objects)
+    {
+        var rand = new Random();
+        if (objects != null)
+        {
+            int idx = rand.Next(objects.Length);
+            Console.WriteLine("Non-virtual show");
+            objects[idx].Show();
+            Console.WriteLine("Virtual show");
+            objects[idx].ShowVirt();
+        }
+        else
+        {
+            Console.WriteLine("There are no elements for request");
+        }
+    }
+    public static void GetAllAssessmentBySubject(ref Assessment[]? objects, string name)
+    {
+
+    }
+    public static void GetAllAssessmentBeforeDate(ref Assessment[]? objects, DateTime date)
+    {
+
+    }
+    public static int AverageAssessmentDuration(Assessment[]? objects)
+    {
+        if (objects != null)
+        {
+            int average = 0;
+            for (int i = 0; i < objects.Length; i++)
+            {
+                average += objects[i].DurationSeconds;
+            }
+            average = average / objects.Length;
+            Console.WriteLine($"There is average durations of all assessments: {average}");
+            return average / objects.Length;
+        }
+        Console.WriteLine("There are no elements for request");
+        return -1;
+    }
 }
