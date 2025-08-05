@@ -42,6 +42,7 @@ class Request
         Console.WriteLine("Here your objects:");
         for (int i = 0; i < objects.Length; i++)
         {
+
             objects[i].Show();
         }
     }
@@ -76,6 +77,7 @@ class Request
             }
         }
     }
+    // TO DO: Make a valid type cast
     public static void GetVirtAndNonVirtDiff(ref Assessment[]? objects)
     {
         var rand = new Random();
@@ -92,13 +94,57 @@ class Request
             Console.WriteLine("There are no elements for request");
         }
     }
-    public static void GetAllAssessmentBySubject(ref Assessment[]? objects, string name)
+    public static int ShowAllAssessmentBySubject(Assessment[]? objects, string subject)
     {
-
+        int count = 0;
+        if (objects != null)
+        {
+            for (int i = 0; i < objects.Length; i++)
+                if (objects[i].Title.ToLower().Contains($"{subject.ToLower()}"))
+                {
+                    count++;
+                    objects[i].ShowVirt();
+                }
+        }
+        else
+            Console.WriteLine("There are no elements for request");
+        Console.WriteLine($"Total: {count}");
+        return count;
     }
-    public static void GetAllAssessmentBeforeDate(ref Assessment[]? objects, DateTime date)
+    public static int[] CountAllAssessmentByType(Assessment[]? objects)
     {
-
+        int[] count = { 0, 0, 0, 0 };
+        if (objects != null)
+        {
+            for (int i = 0; i < objects.Length; i++)
+            {
+                if (objects[i].GetType().Name == "Assessment")
+                {
+                    count[0]++;
+                }
+                if (objects[i].GetType().Name == "Test")
+                {
+                    count[1]++;
+                }
+                if (objects[i].GetType().Name == "Exam")
+                {
+                    count[2]++;
+                }
+                if (objects[i].GetType().Name == "FinalExam")
+                {
+                    count[3]++;
+                }
+            }
+            Console.WriteLine($"Total:\n"
+                + $"Assessment {count[0]}\n"
+                + $"Test {count[1]}\n"
+                + $"Exam {count[2]}\n"
+                + $"FinalExam {count[3]}\n"
+            );
+        }
+        else
+            Console.WriteLine("There are no elements for request");
+        return count;
     }
     public static int AverageAssessmentDuration(Assessment[]? objects)
     {
@@ -106,9 +152,7 @@ class Request
         {
             int average = 0;
             for (int i = 0; i < objects.Length; i++)
-            {
                 average += objects[i].DurationSeconds;
-            }
             average = average / objects.Length;
             Console.WriteLine($"There is average durations of all assessments: {average}");
             return average / objects.Length;

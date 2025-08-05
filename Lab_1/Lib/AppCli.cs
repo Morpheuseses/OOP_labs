@@ -19,7 +19,10 @@ public class AppCLI
             + "3. Manual Init of array\n"
             + "4. Show array elements(Virtual)\n"
             + "5. Show array elements(Non-virtual)\n"
-            + "6. Show average duration in seconds\n"
+            + "6. (Request)Show average duration in seconds\n"
+            + "7. (Request)Show all assessments by subject\n"
+            + "8. (Request)Count all assessments by type\n"
+            + "9. (Request)Get non-virtual and virtual Show() difference"
         );
     }
     public int ChooseOptions()
@@ -67,6 +70,16 @@ public class AppCLI
                     break;
                 case 6:
                     Request.AverageAssessmentDuration(objects);
+                    break;
+                case 7:
+                    string subject = Input.InputMessageString("Write down subject: ");
+                    Request.ShowAllAssessmentBySubject(objects, subject);
+                    break;
+                case 8:
+                    Request.CountAllAssessmentByType(objects);
+                    break;
+                case 9:
+                    Request.GetVirtAndNonVirtDiff(ref objects);
                     break;
                 default:
                     Console.WriteLine("There is no option with this number");
