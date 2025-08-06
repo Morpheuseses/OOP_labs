@@ -1,6 +1,6 @@
 namespace Lib;
 
-public class Test : Assessment
+public class Test : Assessment, IInit, ICloneable, IComparable
 {
     int numberOfQuestions;
     public int NumberOfQuestions
@@ -68,5 +68,34 @@ public class Test : Assessment
         if (obj is Test other)
             return base.Equals(obj) && this.NumberOfQuestions == other.NumberOfQuestions;
         return false;
+    }
+    //public int CompareTo(object? obj)
+    //{
+    //    if (obj == null)
+    //        return 1;
+    //    else
+    //    {
+    //        base.CompareTo(obj);
+    //        var other = (Test)obj;
+    //        if (this.NumberOfQuestions > other.NumberOfQuestions)
+    //            return 1;
+    //        else if (this.NumberOfQuestions < other.NumberOfQuestions)
+    //            return -1;
+    //        return 0;
+    //    }
+    //}
+    public virtual object ShallowCopy()
+    {
+        return (Test)this.MemberwiseClone();
+    }
+    public object Clone()
+    {
+        var newTest = (Test)this.MemberwiseClone();
+        newTest.Students = new List<Student>(this.Students);
+        return newTest;
+    }
+    public override string ToString()
+    {
+        return this.GetFieldsString();
     }
 }

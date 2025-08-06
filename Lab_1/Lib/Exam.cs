@@ -68,4 +68,33 @@ public class Exam : Test
             return false;
         return base.Equals(obj) && this.NumberOfWrittenQuestions == other.NumberOfWrittenQuestions;
     }
+    //public int CompareTo(object? obj)
+    //{
+    //    if (obj == null)
+    //        return 1;
+    //    else
+    //    {
+    //        base.CompareTo(obj);
+    //        var other = (Exam)obj;
+    //        if (this.NumberOfWrittenQuestions > other.NumberOfWrittenQuestions)
+    //            return 1;
+    //        else if (this.NumberOfWrittenQuestions < other.NumberOfWrittenQuestions)
+    //            return -1;
+    //        return 0;
+    //    }
+    //}
+    public virtual object ShallowCopy()
+    {
+        return (Exam)this.MemberwiseClone();
+    }
+    public object Clone()
+    {
+        var newExam = (Exam)this.MemberwiseClone();
+        newExam.Students = new List<Student>(this.Students);
+        return newExam;
+    }
+    public override string ToString()
+    {
+        return this.GetFieldsString();
+    }
 }

@@ -1,7 +1,7 @@
 namespace Lib;
 
 // test, Assessment, exam, final exam
-public class Assessment
+public class Assessment : IInit, ICloneable, IComparable
 {
     string title;
     DateTime date;
@@ -39,23 +39,38 @@ public class Assessment
                 throw new Exception($"{this.GetType().Name}'s duration should last more than 0 seconds and less than 6 hours");
         }
     }
+    public List<Student> Students { get; set; }
     public Assessment()
     {
         this.Title = "None";
         this.Date = DateTime.Now.AddSeconds(1);
         this.DurationSeconds = 1;
+        this.Students = CreateStudent();
     }
     public Assessment(string title, DateTime date, int duration)
     {
         this.Title = title;
         this.Date = date;
         this.DurationSeconds = DurationSeconds;
+        this.Students = CreateStudent();
     }
     public Assessment(Assessment other)
     {
         this.Title = other.Title;
         this.Date = other.Date;
         this.DurationSeconds = other.DurationSeconds;
+        this.Students = other.Students;
+    }
+    public List<Student> CreateStudent()
+    {
+        var rand = new Random();
+        var students = new List<Student>();
+        var length = rand.Next(1, 4);
+        for (int i = 0; i < length; i++)
+        {
+            students.Add(new Student());
+        }
+        return students;
     }
     public virtual void Init()
     {
@@ -94,7 +109,6 @@ public class Assessment
         this.Date = DateTime.Now.AddHours(rand.Next(0, 24)).AddMinutes(rand.Next(0, 60)).AddDays(rand.Next(0, 31)).AddMonths(rand.Next(0, 12)).AddYears(rand.Next(0, 3));
         this.DurationSeconds = rand.Next(1, 21600);
         this.Title = subjects[rand.Next(subjects.Length)];
-
     }
     protected virtual string GetFieldsString()
     {
@@ -127,5 +141,42 @@ public class Assessment
     public override int GetHashCode()
     {
         return HashCode.Combine(this.Date, this.Title, this.DurationSeconds);
+    }
+    public int CompareTo(object? obj)
+    {
+        if (obj == null)
+            return 1;
+        else
+        {
+            var other = (Assessment)obj;
+
+            if (String.Compare(this.Title, other.Title) > 0)
+                return 1;
+            else if (String.Compare(this.Title, other.Title) < 0)
+                return -1;
+            if (DateTime.Compare(this.Date, other.Date) > 0)
+                return 1;
+            else if (DateTime.Compare(this.Date, other.Date) < 0)
+                return -1;
+            if (this.DurationSeconds > other.DurationSeconds)
+                return 1;
+            else if (this.DurationSeconds < other.DurationSeconds)
+                return -1;
+            return 0;
+        }
+    }
+    public virtual object ShallowCopy()
+    {
+        return (Assessment)this.MemberwiseClone();
+    }
+    public object Clone()
+    {
+        var newAssessment = (Assessment)this.MemberwiseClone();
+        newAssessment.Students = new List<Student>(this.Students);
+        return newAssessment;
+    }
+    public override string ToString()
+    {
+        return this.GetFieldsString();
     }
 }

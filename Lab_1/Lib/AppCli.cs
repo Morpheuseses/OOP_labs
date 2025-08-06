@@ -2,12 +2,12 @@ namespace Lib;
 
 public class AppCLI
 {
-    bool state;
+    bool isRunning;
     Assessment[]? objects;
 
     public AppCLI()
     {
-        state = true;
+        isRunning = true;
     }
     public void PrintMenu()
     {
@@ -15,14 +15,21 @@ public class AppCLI
             "Choose one of the following requests(enter number of the option):\n"
             + "0. Exit\n"
             + "1. Print Menu\n"
+            + "Part 1\n"
             + "2. Random Init of array\n"
             + "3. Manual Init of array\n"
             + "4. Show array elements(Virtual)\n"
             + "5. Show array elements(Non-virtual)\n"
+            + "Part 2\n"
             + "6. (Request)Show average duration in seconds\n"
             + "7. (Request)Show all assessments by subject\n"
             + "8. (Request)Count all assessments by type\n"
-            + "9. (Request)Get non-virtual and virtual Show() difference"
+            + "9. (Request)Get non-virtual and virtual Show() difference\n"
+            + "Part 3\n"
+            + "10. Show new hierarchy\n"
+            + "11. Sort by IComparable interface\n"
+            + "13. Sort by IComparer interface\n"
+            + "14. Binary search in array\n"
         );
     }
     public int ChooseOptions()
@@ -32,14 +39,14 @@ public class AppCLI
     public void Init()
     {
         PrintMenu();
-        while (state)
+        while (isRunning)
         {
             int count;
             int chosenRequest = ChooseOptions();
             switch (chosenRequest)
             {
                 case 0:
-                    state = false;
+                    isRunning = false;
                     break;
                 case 1:
                     PrintMenu();
@@ -80,6 +87,25 @@ public class AppCLI
                     break;
                 case 9:
                     Request.GetVirtAndNonVirtDiff(ref objects);
+                    break;
+                case 10:
+                    Console.WriteLine("There some IInit new hierarchy elements:");
+                    Request.ShowAssessementIInit();
+                    break;
+                case 11:
+                    Request.ShowAssessmentSortIComparable(objects);
+                    break;
+                case 13:
+                    Request.ShowAssessmentSortIComparer(objects);
+                    break;
+                case 14:
+                    string searchTitle = "DiscreteMath";
+                    Console.WriteLine($"Search value in array: {searchTitle}");
+                    Assessment? elem = Request.BinarySearchByTitle(objects, searchTitle);
+                    if (elem is not null)
+                        elem.ShowVirt();
+                    else
+                        Console.WriteLine("There is no element with Title");
                     break;
                 default:
                     Console.WriteLine("There is no option with this number");

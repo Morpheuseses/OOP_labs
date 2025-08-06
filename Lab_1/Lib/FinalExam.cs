@@ -6,7 +6,7 @@ public enum GraduationLevel
     Master,
     PhD
 }
-public class FinalExam : Exam
+class FinalExam : Exam
 {
     public GraduationLevel GraduationLevel { get; set; }
     public FinalExam() : base()
@@ -64,5 +64,19 @@ public class FinalExam : Exam
         if (obj is not FinalExam other)
             return false;
         return base.Equals(obj) && this.GraduationLevel == other.GraduationLevel;
+    }
+    public virtual object ShallowCopy()
+    {
+        return (FinalExam)this.MemberwiseClone();
+    }
+    public object Clone()
+    {
+        var newFinalExam = (FinalExam)this.MemberwiseClone();
+        newFinalExam.Students = new List<Student>(this.Students);
+        return newFinalExam;
+    }
+    public override string ToString()
+    {
+        return this.GetFieldsString();
     }
 }

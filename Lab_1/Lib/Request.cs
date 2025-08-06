@@ -77,16 +77,35 @@ class Request
             }
         }
     }
-    // TO DO: Make a valid type cast
     public static void GetVirtAndNonVirtDiff(ref Assessment[]? objects)
     {
         var rand = new Random();
         if (objects != null)
         {
             int idx = rand.Next(objects.Length);
-            Console.WriteLine("Non-virtual show");
+            Console.WriteLine("Non-virtual Show()(typecast)");
+            var fexam = objects[idx] as FinalExam;
+            if (fexam != null)
+                fexam.Show();
+            else
+            {
+                var exam = objects[idx] as Exam;
+                if (exam != null)
+                    exam.Show();
+                else
+                {
+                    var test = objects[idx] as Test;
+                    if (test != null)
+                        test.Show();
+                    else
+                    {
+                        objects[idx].Show();
+                    }
+                }
+            }
+            Console.WriteLine("\nNon-virtual Show()(without typecast)");
             objects[idx].Show();
-            Console.WriteLine("Virtual show");
+            Console.WriteLine("Virtual Show()");
             objects[idx].ShowVirt();
         }
         else
@@ -118,21 +137,20 @@ class Request
         {
             for (int i = 0; i < objects.Length; i++)
             {
-                if (objects[i].GetType().Name == "Assessment")
+                switch (objects[i].GetType().Name)
                 {
-                    count[0]++;
-                }
-                if (objects[i].GetType().Name == "Test")
-                {
-                    count[1]++;
-                }
-                if (objects[i].GetType().Name == "Exam")
-                {
-                    count[2]++;
-                }
-                if (objects[i].GetType().Name == "FinalExam")
-                {
-                    count[3]++;
+                    case "Assessment":
+                        count[0]++;
+                        break;
+                    case "Test":
+                        count[1]++;
+                        break;
+                    case "Exam":
+                        count[2]++;
+                        break;
+                    case "FinalExam":
+                        count[3]++;
+                        break;
                 }
             }
             Console.WriteLine($"Total:\n"
@@ -159,5 +177,68 @@ class Request
         }
         Console.WriteLine("There are no elements for request");
         return -1;
+    }
+    public static void ShowAssessementIInit()
+    {
+        IInit[] inits = new IInit[]
+        {
+            new Assessment(),
+            new Test(),
+            new Exam(),
+            new FinalExam(),
+            new Student()
+        };
+        Console.WriteLine("IInit objects initialization: ");
+        foreach (var item in inits)
+        {
+            item.RandomInit();
+            Console.WriteLine(item.ToString());
+        }
+    }
+    public static void ShowAssessmentSortIComparable(Assessment[]? objects)
+    {
+        if (objects is not null)
+        {
+            Array.Sort(objects);
+            Console.WriteLine("Sorted array: ");
+            Request.ShowObjectsVirt(objects);
+        }
+        else
+            Console.WriteLine("There are no elements for request");
+    }
+    public static void ShowAssessmentSortIComparer(Assessment[]? objects)
+    {
+        if (objects is not null)
+        {
+            Array.Sort(objects, new SortbyDuration());
+            Console.WriteLine("Sorted array by duration: ");
+            Request.ShowObjectsVirt(objects);
+        }
+        else
+            Console.WriteLine("There are no elements for request");
+    }
+    public static Assessment? BinarySearchByTitle(Assessment[]? objects, string? target)
+    {
+        if (objects is not null)
+        {
+            Array.Sort(objects);
+            int low = 0, mid = objects.Length / 2, high = objects.Length - 1;
+            while (low <= high)
+            {
+                mid = low + (high - low) / 2;
+
+                if (objects[mid].Title == target)
+                {
+                    return objects[mid];
+                }
+                else if (String.Compare(objects[mid].Title, target) < 0)
+                    low = mid + 1;
+                else
+                    high = mid - 1;
+            }
+        }
+        else
+            Console.WriteLine("There are no elements for request");
+        return null;
     }
 }
