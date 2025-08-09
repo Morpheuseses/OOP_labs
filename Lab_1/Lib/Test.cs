@@ -84,11 +84,11 @@ public class Test : Assessment, IInit, ICloneable, IComparable
     //        return 0;
     //    }
     //}
-    public virtual object ShallowCopy()
+    public override object ShallowCopy()
     {
         return (Test)this.MemberwiseClone();
     }
-    public object Clone()
+    public override object Clone()
     {
         var newTest = (Test)this.MemberwiseClone();
         newTest.Students = new List<Student>(this.Students);

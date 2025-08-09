@@ -83,11 +83,11 @@ public class Exam : Test
     //        return 0;
     //    }
     //}
-    public virtual object ShallowCopy()
+    public override object ShallowCopy()
     {
         return (Exam)this.MemberwiseClone();
     }
-    public object Clone()
+    public override object Clone()
     {
         var newExam = (Exam)this.MemberwiseClone();
         newExam.Students = new List<Student>(this.Students);

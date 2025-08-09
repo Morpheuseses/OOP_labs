@@ -1,6 +1,6 @@
 namespace Lib;
 
-class Request
+public class Request
 {
     public static void RandomInitObjects(ref Assessment[]? objects, int count)
     {
@@ -210,7 +210,7 @@ class Request
     {
         if (objects is not null)
         {
-            Array.Sort(objects, new SortbyDuration());
+            Array.Sort(objects, new SortByDuration());
             Console.WriteLine("Sorted array by duration: ");
             Request.ShowObjectsVirt(objects);
         }

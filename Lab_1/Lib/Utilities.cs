@@ -49,6 +49,8 @@ public class Input
         {
             inputValue = Convert.ToString(Console.ReadLine());
         }
+        if (inputValue is null)
+            inputValue = "";
         return inputValue;
     }
 

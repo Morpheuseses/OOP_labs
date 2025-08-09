@@ -51,7 +51,7 @@ public class Assessment : IInit, ICloneable, IComparable
     {
         this.Title = title;
         this.Date = date;
-        this.DurationSeconds = DurationSeconds;
+        this.DurationSeconds = duration;
         this.Students = CreateStudent();
     }
     public Assessment(Assessment other)
@@ -169,7 +169,7 @@ public class Assessment : IInit, ICloneable, IComparable
     {
         return (Assessment)this.MemberwiseClone();
     }
-    public object Clone()
+    public virtual object Clone()
     {
         var newAssessment = (Assessment)this.MemberwiseClone();
         newAssessment.Students = new List<Student>(this.Students);

@@ -65,11 +65,11 @@ class FinalExam : Exam
             return false;
         return base.Equals(obj) && this.GraduationLevel == other.GraduationLevel;
     }
-    public virtual object ShallowCopy()
+    public override object ShallowCopy()
     {
         return (FinalExam)this.MemberwiseClone();
     }
-    public object Clone()
+    public override object Clone()
     {
         var newFinalExam = (FinalExam)this.MemberwiseClone();
         newFinalExam.Students = new List<Student>(this.Students);

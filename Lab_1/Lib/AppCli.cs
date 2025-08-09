@@ -30,6 +30,7 @@ public class AppCLI
             + "11. Sort by IComparable interface\n"
             + "13. Sort by IComparer interface\n"
             + "14. Binary search in array\n"
+            + "15. Clear Console\n"
         );
     }
     public int ChooseOptions()
@@ -106,6 +107,9 @@ public class AppCLI
                         elem.ShowVirt();
                     else
                         Console.WriteLine("There is no element with Title");
+                    break;
+                case 15:
+                    Console.Clear();
                     break;
                 default:
                     Console.WriteLine("There is no option with this number");
