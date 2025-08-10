@@ -1,8 +1,7 @@
 using CollectionLib;
 using Lib;
 
-namespace Console;
-
+// Maybe should make an cli interface
 class Program
 {
     public static void Main(string[] args)
@@ -13,13 +12,26 @@ class Program
         int count = 10;
         Assessment[]? objects = null;
         Request.RandomInitObjects(ref objects, count);
+        //        foreach (var item in objects)
+        //        {
+        //            item.ShowVirt();
+        //        }
+        //btr.AddRange(objects);
         foreach (var item in objects)
         {
-            item.ShowVirt();
+            btr.Add(item);
         }
-        btr.AddRange(objects);
-
         btr.ConsolePrintTree();
+        btr.Add(a);
+        btr.ConsolePrintTree();
+        Console.WriteLine(btr.GetHeight());
 
+        var btr2 = new BinarySearchTree<Assessment>(btr);
+
+        btr2.ConsolePrintTree();
+
+        bool isThere = btr2.Contains(a);
+
+        Console.WriteLine(isThere);
     }
 }

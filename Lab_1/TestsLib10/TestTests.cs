@@ -29,7 +29,7 @@ public static class TestTests
                 + $"Title: {test.Title}\n"
                 + $"Date: {test.Date}\n"
                 + $"Duration: {test.DurationSeconds / 3600}h, {test.DurationSeconds / 60 % 60}m, {test.DurationSeconds % 60}s\n"
-                + $"Number of questions: {test.NumberOfQuestions}";
+                + $"Number of questions: {test.NumberOfQuestions}\n";
 
         var actual = test.ToString();
 

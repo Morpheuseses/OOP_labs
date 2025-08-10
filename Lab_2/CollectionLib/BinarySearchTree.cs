@@ -5,13 +5,14 @@ using Lib;
 
 namespace CollectionLib;
 
-// TODO: Fix add to tree (probably problem with CompareTo implementation, but maybe its only class problem)
+// TODO:    Make Comparer for elements
+//          Should implement Remove() maybe...
 public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     where T : IComparable, ICloneable, IInit
 {
     public NodeTree<T> RootNode { get; set; }
 
-    public int Count => throw new NotImplementedException();
+    public int Count { get; private set; }
 
     public bool IsReadOnly => false;
 
@@ -25,10 +26,46 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     }
     public BinarySearchTree(BinarySearchTree<T> btr)
     {
-        this.RootNode = btr.RootNode;
+        this.RootNode = CloneNode(btr.RootNode);
+        this.Count = btr.Count;
     }
-
+    private NodeTree<T> CloneNode(NodeTree<T> node)
+    {
+        if (node is null)
+            return null;
+        return new NodeTree<T>(node)
+        {
+            Left = CloneNode(node.Left),
+            Right = CloneNode(node.Right)
+        };
+    }
+    private void PreOrder(Action<NodeTree<T>> operation)
+    {
+        var list = new List<NodeTree<T>>();
+        PreOrder(RootNode, operation);
+    }
+    private void PreOrder(NodeTree<T> node, Action<NodeTree<T>> operation)
+    {
+        if (node is null)
+            return;
+        operation(node);
+        PreOrder(node.Left, operation);
+        PreOrder(node.Right, operation);
+    }
+    public int GetHeight()
+    {
+        return GetHeight(RootNode);
+    }
     private int GetHeight(NodeTree<T> node)
+    {
+        if (node == null)
+            return 0;
+        int leftHeight = GetHeight(node.Left);
+        int rightHeight = GetHeight(node.Right);
+
+        return Math.Max(leftHeight, rightHeight) + 1;
+    }
+    private int GetNodeHeight(NodeTree<T> node)
     {
         return node is not null ? node.Height : 0;
     }
@@ -36,20 +73,20 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     {
         var left = node.Left;
         var right = node.Right;
-        return GetHeight(right) - GetHeight(left);
+        return GetNodeHeight(right) - GetNodeHeight(left);
     }
     private void SetHeight(ref NodeTree<T> node)
     {
-        var hLeft = GetHeight(node);
-        var hRight = GetHeight(node);
-        node.Height = (hLeft > hRight ? hLeft : hRight) + 1;
+        int hLeft = GetNodeHeight(node);
+        int hRight = GetNodeHeight(node);
+        //node.Height = (hLeft > hRight ? hLeft : hRight) + 1;
+        node.Height = Math.Max(hLeft, hRight) + 1;
     }
-
     private NodeTree<T> RotateRight(ref NodeTree<T> node)
     {
         NodeTree<T> nodeLeft = node.Left;
         node.Left = nodeLeft.Right;
-        nodeLeft.Right = node.Right;
+        nodeLeft.Right = node;
         SetHeight(ref node);
         SetHeight(ref nodeLeft);
         return nodeLeft;
@@ -89,14 +126,18 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     public void Add(T data)
     {
         RootNode = Add(RootNode, data);
+        Count++;
     }
     public NodeTree<T> Add(NodeTree<T>? node, T data)
     {
-        if (node == null) return new NodeTree<T>(data);
-        if (data.CompareTo(node.Data) < 0)
+        if (node == null)
+            return new NodeTree<T>(data);
+        int compResult = data.CompareTo(node.Data);
+        if (compResult < 0) //  && data.GetType() == node.Data.GetType()
             node.Left = Add(node.Left, data);
-        else
+        else if (compResult != 0)
             node.Right = Add(node.Right, data);
+
         return BalanceTree(ref node);
     }
     public void AddRange(T[] objects)
@@ -110,35 +151,37 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     {
         ConsolePrintTree(RootNode, "", true);
     }
-    public void ConsolePrintTree(NodeTree<T> node, string indent, bool isLast)
+    public string GetConsoleTreeString()
+    {
+        return GetConsoleTreeString(RootNode, "", true);
+    }
+    public string GetConsoleTreeString(NodeTree<T> node, string indent, bool isLast)
     {
         if (node is null)
-            return;
-        Console.Write(indent);
-        if (isLast)
-        {
-            Console.Write("\u2514\u2500\u2500 ");
-            indent += "    "; // 4 chars
-        }
-        else
-        {
-            Console.Write("\u251C\u2500\u2500 ");
-            indent += "\u2502   "; // 4 chars
-        }
-        string toPrint = node.Data.ToString().Replace('\n', ' ');
-        toPrint = toPrint.Replace("-", "");
-        Console.WriteLine(toPrint);
+            return "";
+        var sb = new System.Text.StringBuilder();
+        sb.Append(indent);
+        sb.Append(isLast ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ");
+        string toPrint = node.Height + " " + node.Data.ToString()
+                        .Replace("\n", "").Replace("-", "") + "\n";
+        sb.Append(toPrint);
         var children = new List<NodeTree<T>>();
         if (node.Left != null)
             children.Add(node.Left);
         if (node.Right != null)
             children.Add(node.Right);
         for (int i = 0; i < children.Count; i++)
-            ConsolePrintTree(children[i], indent, i == children.Count - 1);
+            sb.Append(
+                GetConsoleTreeString(
+                    children[i],
+                    indent + (isLast ? "    " : "\u2502   "),
+                    i == children.Count - 1)
+            );
+        return sb.ToString();
     }
-    public void Find()
+    public void ConsolePrintTree(NodeTree<T> node, string indent, bool isLast)
     {
-
+        Console.WriteLine(this.GetConsoleTreeString());
     }
     public bool Remove(T data)
     {
@@ -150,13 +193,12 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     }
     public object Clone()
     {
-        return null;
+        return new BinarySearchTree<T>(this);
     }
     public void Clear()
     {
         RootNode = null;
     }
-
     public override bool Equals(object obj)
     {
         return obj is BinarySearchTree<T> tree &&
@@ -166,25 +208,61 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     {
         return HashCode.Combine(RootNode);
     }
+    public NodeTree<T> FindNode(T data, NodeTree<T> startNode)
+    {
+        if (startNode is null)
+            return null;
+        int result = data.CompareTo(startNode.Data);
+        if (result == 0)
+            return startNode;
+        else if (result < 0)
+            return FindNode(data, startNode.Left);
+        else
+            return FindNode(data, startNode.Right);
+    }
     public bool Contains(T item)
     {
-        throw new NotImplementedException();
+        return FindNode(item, RootNode) is not null;
     }
     public void CopyTo(T[] array, int arrayIndex)
     {
-        throw new NotImplementedException();
+        if (array == null)
+            throw new ArgumentNullException(nameof(array));
+        if (arrayIndex < 0 || arrayIndex >= array.Length)
+            throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+        if (array.Length - arrayIndex < Count)
+            throw new ArgumentException("There is no enough space in target array!");
+        foreach (var value in this)
+            array[arrayIndex++] = value;
+    }
+    private IEnumerable<T>? PreOrder(NodeTree<T>? node)
+    {
+        if (node != null)
+        {
+            yield return node.Data;
+            foreach (var item in PreOrder(node.Left))
+            {
+                yield return item;
+            }
+            foreach (var item in PreOrder(node.Right))
+            {
+                yield return item;
+            }
+        }
     }
     public IEnumerator<T> GetEnumerator()
     {
-        throw new NotImplementedException();
+        return PreOrder(RootNode).GetEnumerator();
     }
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
     }
-
     public override string? ToString()
     {
-        return base.ToString();
+        if (Count == 0)
+            return "None";
+        else
+            return GetConsoleTreeString();
     }
 }
