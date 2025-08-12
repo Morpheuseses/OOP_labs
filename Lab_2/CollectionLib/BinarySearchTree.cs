@@ -59,51 +59,49 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         var right = node.Right;
         return GetNodeHeight(right) - GetNodeHeight(left);
     }
-    private void SetHeight(ref TreeNode<T> node)
+    private void SetHeight(TreeNode<T> node)
     {
         int hLeft = GetNodeHeight(node);
         int hRight = GetNodeHeight(node);
         //node.Height = (hLeft > hRight ? hLeft : hRight) + 1;
         node.Height = Math.Max(hLeft, hRight) + 1;
     }
-    private TreeNode<T> RotateRight(ref TreeNode<T> node)
+    private TreeNode<T> RotateRight(TreeNode<T> node)
     {
         TreeNode<T> nodeLeft = node.Left;
         node.Left = nodeLeft.Right;
         nodeLeft.Right = node;
-        SetHeight(ref node);
-        SetHeight(ref nodeLeft);
+        SetHeight(node);
+        SetHeight(nodeLeft);
         return nodeLeft;
     }
-    private TreeNode<T> RotateLeft(ref TreeNode<T> node)
+    private TreeNode<T> RotateLeft(TreeNode<T> node)
     {
         TreeNode<T> nodeRight = node.Right;
         node.Right = nodeRight.Left;
         nodeRight.Left = node;
-        SetHeight(ref node);
-        SetHeight(ref nodeRight);
+        SetHeight(node);
+        SetHeight(nodeRight);
         return nodeRight;
     }
-    private TreeNode<T> BalanceTree(ref TreeNode<T> node)
+    private TreeNode<T> BalanceTree(TreeNode<T> node)
     {
-        SetHeight(ref node);
+        SetHeight(node);
         if (Bfactor(node) == 2)
         {
             if (Bfactor(node.Right) < 0)
             {
-                var nodeRight = node.Right;
-                node.Right = RotateRight(ref nodeRight);
+                node.Right = RotateRight(node.Right);
             }
-            return RotateLeft(ref node);
+            return RotateLeft(node);
         }
         if (Bfactor(node) == -2)
         {
             if (Bfactor(node.Left) > 0)
             {
-                var nodeLeft = node.Left;
-                node.Left = RotateLeft(ref nodeLeft);
+                node.Left = RotateLeft(node.Left);
             }
-            return RotateRight(ref node);
+            return RotateRight(node);
         }
         return node;
     }
@@ -122,7 +120,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         else if (compResult != 0)
             node.Right = Add(node.Right, data);
 
-        return BalanceTree(ref node);
+        return BalanceTree(node);
     }
     public void AddRange(T[] objects)
     {
@@ -194,9 +192,9 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
             TreeNode<T> min = FindMin(right);
             min.Right = RemoveMin(right);
             min.Left = left;
-            return BalanceTree(ref min);
+            return BalanceTree(min);
         }
-        return BalanceTree(ref node);
+        return BalanceTree(node);
     }
     private TreeNode<T> FindMin(TreeNode<T> node)
     {
@@ -207,7 +205,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         if (node.Left is null)
             return node.Right;
         node.Left = RemoveMin(node.Left);
-        return BalanceTree(ref node);
+        return BalanceTree(node);
     }
     public object ShallowCopy()
     {

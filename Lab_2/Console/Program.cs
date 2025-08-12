@@ -43,6 +43,7 @@ class Program
         btr.Add(test);
 
         btr.ConsolePrintTree();
+        Console.WriteLine(btr.Remove(test));
         btr.ConsolePrintTree();
     }
 }
