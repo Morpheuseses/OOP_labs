@@ -1,19 +1,16 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Lib;
 
 namespace CollectionLib;
 
 // TODO:    Make Comparer for elements
 //          Should implement Remove() maybe...
+//          Should implement Capacity (real count < capacity = count*2 or > count)
 public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     where T : IComparable, ICloneable, IInit
 {
-    public NodeTree<T> RootNode { get; set; }
-
+    public TreeNode<T> RootNode { get; set; }
     public int Count { get; private set; }
-
     public bool IsReadOnly => false;
 
     public BinarySearchTree()
@@ -29,34 +26,21 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         this.RootNode = CloneNode(btr.RootNode);
         this.Count = btr.Count;
     }
-    private NodeTree<T> CloneNode(NodeTree<T> node)
+    private TreeNode<T> CloneNode(TreeNode<T> node)
     {
         if (node is null)
             return null;
-        return new NodeTree<T>(node)
+        return new TreeNode<T>(node)
         {
             Left = CloneNode(node.Left),
             Right = CloneNode(node.Right)
         };
     }
-    private void PreOrder(Action<NodeTree<T>> operation)
-    {
-        var list = new List<NodeTree<T>>();
-        PreOrder(RootNode, operation);
-    }
-    private void PreOrder(NodeTree<T> node, Action<NodeTree<T>> operation)
-    {
-        if (node is null)
-            return;
-        operation(node);
-        PreOrder(node.Left, operation);
-        PreOrder(node.Right, operation);
-    }
-    public int GetHeight()
+    public virtual int GetHeight()
     {
         return GetHeight(RootNode);
     }
-    private int GetHeight(NodeTree<T> node)
+    private int GetHeight(TreeNode<T> node)
     {
         if (node == null)
             return 0;
@@ -65,42 +49,42 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
 
         return Math.Max(leftHeight, rightHeight) + 1;
     }
-    private int GetNodeHeight(NodeTree<T> node)
+    private int GetNodeHeight(TreeNode<T> node)
     {
         return node is not null ? node.Height : 0;
     }
-    private int Bfactor(NodeTree<T> node)
+    private int Bfactor(TreeNode<T> node)
     {
         var left = node.Left;
         var right = node.Right;
         return GetNodeHeight(right) - GetNodeHeight(left);
     }
-    private void SetHeight(ref NodeTree<T> node)
+    private void SetHeight(ref TreeNode<T> node)
     {
         int hLeft = GetNodeHeight(node);
         int hRight = GetNodeHeight(node);
         //node.Height = (hLeft > hRight ? hLeft : hRight) + 1;
         node.Height = Math.Max(hLeft, hRight) + 1;
     }
-    private NodeTree<T> RotateRight(ref NodeTree<T> node)
+    private TreeNode<T> RotateRight(ref TreeNode<T> node)
     {
-        NodeTree<T> nodeLeft = node.Left;
+        TreeNode<T> nodeLeft = node.Left;
         node.Left = nodeLeft.Right;
         nodeLeft.Right = node;
         SetHeight(ref node);
         SetHeight(ref nodeLeft);
         return nodeLeft;
     }
-    private NodeTree<T> RotateLeft(ref NodeTree<T> node)
+    private TreeNode<T> RotateLeft(ref TreeNode<T> node)
     {
-        NodeTree<T> nodeRight = node.Right;
+        TreeNode<T> nodeRight = node.Right;
         node.Right = nodeRight.Left;
         nodeRight.Left = node;
         SetHeight(ref node);
         SetHeight(ref nodeRight);
         return nodeRight;
     }
-    private NodeTree<T> BalanceTree(ref NodeTree<T> node)
+    private TreeNode<T> BalanceTree(ref TreeNode<T> node)
     {
         SetHeight(ref node);
         if (Bfactor(node) == 2)
@@ -123,15 +107,15 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         }
         return node;
     }
-    public void Add(T data)
+    public virtual void Add(T data)
     {
         RootNode = Add(RootNode, data);
         Count++;
     }
-    public NodeTree<T> Add(NodeTree<T>? node, T data)
+    public TreeNode<T> Add(TreeNode<T>? node, T data)
     {
         if (node == null)
-            return new NodeTree<T>(data);
+            return new TreeNode<T>(data);
         int compResult = data.CompareTo(node.Data);
         if (compResult < 0) //  && data.GetType() == node.Data.GetType()
             node.Left = Add(node.Left, data);
@@ -147,7 +131,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
             Add(item);
         }
     }
-    public void ConsolePrintTree()
+    public virtual void ConsolePrintTree()
     {
         ConsolePrintTree(RootNode, "", true);
     }
@@ -155,7 +139,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     {
         return GetConsoleTreeString(RootNode, "", true);
     }
-    public string GetConsoleTreeString(NodeTree<T> node, string indent, bool isLast)
+    public string GetConsoleTreeString(TreeNode<T> node, string indent, bool isLast)
     {
         if (node is null)
             return "";
@@ -163,9 +147,9 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         sb.Append(indent);
         sb.Append(isLast ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ");
         string toPrint = node.Height + " " + node.Data.ToString()
-                        .Replace("\n", "").Replace("-", "") + "\n";
+                        .Replace("\n", "|").Replace("-", "") + "\n";
         sb.Append(toPrint);
-        var children = new List<NodeTree<T>>();
+        var children = new List<TreeNode<T>>();
         if (node.Left != null)
             children.Add(node.Left);
         if (node.Right != null)
@@ -179,13 +163,51 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
             );
         return sb.ToString();
     }
-    public void ConsolePrintTree(NodeTree<T> node, string indent, bool isLast)
+    public void ConsolePrintTree(TreeNode<T> node, string indent, bool isLast)
     {
         Console.WriteLine(this.GetConsoleTreeString());
     }
-    public bool Remove(T data)
+    public virtual bool Remove(T data)
     {
-        return false;
+
+        RootNode = Remove(data, RootNode);
+        if (this.Contains(data))
+            return false;
+        Count--;
+        return true;
+    }
+    private TreeNode<T> Remove(T data, TreeNode<T> node)
+    {
+        if (node is null)
+            return null;
+        var comparison = node.Data.CompareTo(data);
+        if (comparison > 0)
+            node.Left = Remove(data, node.Left);
+        else if (comparison < 0)
+            node.Right = Remove(data, node.Right);
+        else
+        {
+            TreeNode<T> left = node.Left;
+            TreeNode<T> right = node.Right;
+            if (right is null)
+                return left;
+            TreeNode<T> min = FindMin(right);
+            min.Right = RemoveMin(right);
+            min.Left = left;
+            return BalanceTree(ref min);
+        }
+        return BalanceTree(ref node);
+    }
+    private TreeNode<T> FindMin(TreeNode<T> node)
+    {
+        return node.Left is not null ? FindMin(node.Left) : node;
+    }
+    private TreeNode<T> RemoveMin(TreeNode<T> node)
+    {
+        if (node.Left is null)
+            return node.Right;
+        node.Left = RemoveMin(node.Left);
+        return BalanceTree(ref node);
     }
     public object ShallowCopy()
     {
@@ -199,16 +221,32 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     {
         RootNode = null;
     }
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-        return obj is BinarySearchTree<T> tree &&
-               EqualityComparer<NodeTree<T>>.Default.Equals(RootNode, tree.RootNode);
+        if (obj is not BinarySearchTree<T>)
+            return false;
+        else
+            return Equals(obj);
+    }
+    public bool Equals(BinarySearchTree<T>? other)
+    {
+        if (other is null)
+            return false;
+        var enumerator = GetEnumerator();
+        var otherEnumerator = other.GetEnumerator();
+        while (enumerator.MoveNext() && otherEnumerator.MoveNext())
+            if (!enumerator.Current.Equals(otherEnumerator.Current))
+                return false;
+        return true;
     }
     public override int GetHashCode()
     {
-        return HashCode.Combine(RootNode);
+        var hashCode = 0;
+        foreach (var item in this)
+            hashCode += item.GetHashCode();
+        return hashCode;
     }
-    public NodeTree<T> FindNode(T data, NodeTree<T> startNode)
+    public TreeNode<T> FindNode(T data, TreeNode<T> startNode)
     {
         if (startNode is null)
             return null;
@@ -235,7 +273,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         foreach (var value in this)
             array[arrayIndex++] = value;
     }
-    private IEnumerable<T>? PreOrder(NodeTree<T>? node)
+    private IEnumerable<T>? PreOrder(TreeNode<T>? node)
     {
         if (node != null)
         {

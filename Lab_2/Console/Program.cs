@@ -33,5 +33,16 @@ class Program
         bool isThere = btr2.Contains(a);
 
         Console.WriteLine(isThere);
+
+        Console.WriteLine(btr.Equals(btr2));
+
+        Test test = new Test()
+        {
+            Title = "Hehehehhehoeheooehoe"
+        };
+        btr.Add(test);
+
+        btr.ConsolePrintTree();
+        btr.ConsolePrintTree();
     }
 }
