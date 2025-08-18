@@ -2,6 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventAppLib\EventAppLib.csproj" />
+    <ProjectReference Include="..\..\Lab_1\Lib\Lib.csproj" />
+    <ProjectReference Include="..\..\Lab_2\CollectionLib\CollectionLib.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

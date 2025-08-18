@@ -4,13 +4,13 @@ using Lib;
 namespace CollectionLib;
 
 // TODO:    Make Comparer for elements
-//          Should implement Remove() maybe...
 //          Should implement Capacity (real count < capacity = count*2 or > count)
 public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
     where T : IComparable, ICloneable, IInit
 {
     public TreeNode<T> RootNode { get; set; }
     public int Count { get; private set; }
+    public int Length { get => this.Count; }
     public bool IsReadOnly => false;
 
     public BinarySearchTree()
@@ -26,7 +26,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         this.RootNode = CloneNode(btr.RootNode);
         this.Count = btr.Count;
     }
-    private TreeNode<T> CloneNode(TreeNode<T> node)
+    protected TreeNode<T> CloneNode(TreeNode<T> node)
     {
         if (node is null)
             return null;
@@ -66,7 +66,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         //node.Height = (hLeft > hRight ? hLeft : hRight) + 1;
         node.Height = Math.Max(hLeft, hRight) + 1;
     }
-    private TreeNode<T> RotateRight(TreeNode<T> node)
+    protected TreeNode<T> RotateRight(TreeNode<T> node)
     {
         TreeNode<T> nodeLeft = node.Left;
         node.Left = nodeLeft.Right;
@@ -75,7 +75,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         SetHeight(nodeLeft);
         return nodeLeft;
     }
-    private TreeNode<T> RotateLeft(TreeNode<T> node)
+    protected TreeNode<T> RotateLeft(TreeNode<T> node)
     {
         TreeNode<T> nodeRight = node.Right;
         node.Right = nodeRight.Left;
@@ -84,7 +84,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         SetHeight(nodeRight);
         return nodeRight;
     }
-    private TreeNode<T> BalanceTree(TreeNode<T> node)
+    protected TreeNode<T> BalanceTree(TreeNode<T> node)
     {
         SetHeight(node);
         if (Bfactor(node) == 2)
@@ -144,7 +144,7 @@ public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
         var sb = new System.Text.StringBuilder();
         sb.Append(indent);
         sb.Append(isLast ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ");
-        string toPrint = node.Height + " " + node.Data.ToString()
+        string toPrint = " " + node.Data.ToString()
                         .Replace("\n", "|").Replace("-", "") + "\n";
         sb.Append(toPrint);
         var children = new List<TreeNode<T>>();

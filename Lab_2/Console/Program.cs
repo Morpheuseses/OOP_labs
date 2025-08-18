@@ -45,5 +45,10 @@ class Program
         btr.ConsolePrintTree();
         Console.WriteLine(btr.Remove(test));
         btr.ConsolePrintTree();
+
+        foreach (var item in btr)
+        {
+            item.ShowVirt();
+        }
     }
 }

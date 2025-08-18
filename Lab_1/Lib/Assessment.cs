@@ -1,6 +1,7 @@
 namespace Lib;
 
 // test, Assessment, exam, final exam
+// Assessment <- Test <- Exam <- FinalExam
 public class Assessment : IInit, ICloneable, IComparable
 {
     string title;

@@ -1,9 +1,15 @@
 using EventAppLib;
+using Lib;
+using CollectionLib;
 
 class Program
 {
-    public void Main(string[] args)
+    public static void Main(string[] args)
     {
-        Console.WriteLine("Hello world!");
+        NewAssessmentTree tree = new NewAssessmentTree();
+        Assessment[] objects = new Assessment[10];
+        Request.RandomInitObjects(ref objects, 10);
+        tree.AddRange(objects);
+        tree.ConsolePrintTree();
     }
 }
