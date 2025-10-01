@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+
   <ItemGroup>
-    <ProjectReference Include="..\..\Lab_12\CollectionLib\CollectionLib.csproj" />
-    <ProjectReference Include="..\..\Lab_10\Lib\Lib.csproj" />
+    <ProjectReference Include="..\Lab10\Lab10.csproj" />
   </ItemGroup>
+
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
