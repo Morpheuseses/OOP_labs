@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CollectionApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="800" Height="600"
+        x:Class="CollectionApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="CollectionApp">
+
+    <!--<TextBlock Text="{Binding SomethingCool}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+    <Grid RowDefinitions="40, *, 40" Background="{DynamicResource AbsoluteBackground}">
+        <!-- Title bar-->
+        <Grid Grid.Row="0" Background="{DynamicResource PrimaryBackground}" Height="40" ColumnDefinitions="Auto, Auto, *, Auto, Auto">
+            <!--<Rectangle Grid.Column="0" Fill="Gray" Width="40"></Rectangle>-->
+            <Button Content="{Binding SaveButton}" HorizontalAlignment="Center" 
+                Grid.Column="0" Foreground="White" FontSize="20" Background="Gray" Width="40"
+                Command="{Binding SaveButtonCommand}">
+            </Button>
+            <Rectangle Grid.Column="1" Fill="Gray" Width="40"></Rectangle>
+            <StackPanel Grid.Column="2">
+                <Label Content="{Binding AppName}" Foreground="White" HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                </Label>
+            </StackPanel>
+            <Rectangle Grid.Column="3" Fill="Gray" Width="40"></Rectangle>
+            <Button Content="{Binding Close}" HorizontalAlignment="Center"
+                    Grid.Column="4" Foreground="White" FontSize="20" Background="Gray" Width="40"
+                    Click="CloseButtonClickHandler">
+            </Button>
+        </Grid>
+        <!-- Main area -->
+        <Grid Grid.Row="1" ColumnDefinitions="400, *" >
+            <Border Grid.Column="0" Padding="10" Background="{DynamicResource SidebarBackground}">
+                <Grid RowDefinitions="*, Auto">
+                    <StackPanel>
+                        <TreeView Margin="5"
+                                  ItemsSource="{Binding Nodes}" 
+                                  SelectedItems="{Binding SelectedNodes}"
+                                  SelectionMode="Multiple">
+                          <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding SubNodes}" >
+                              <Border HorizontalAlignment="Stretch"
+                                      CornerRadius="5" Padding="5 3">
+                                <Button Content="{Binding Title}" 
+                                        Click="NodeButtonClick"
+                                        Foreground="{DynamicResource PrimaryForeground}">
+                                        <!--Command="{Binding Command}"--> 
+                                </Button>
+                              </Border>
+                            </TreeDataTemplate>
+                          </TreeView.ItemTemplate>
+                        </TreeView>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentPage}" />
+        </Grid>
+        <!-- Bottom bar -->
+        <Grid Grid.Row="2" Background="Gray" >
+            <TextBlock Text="{Binding StatusText}" Foreground="White" Padding="5" FontSize="14" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{62EB201B-7BD7-4A79-9638-A9636914AB31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionApp", "CollectionApp\CollectionApp.csproj", "{9CFFBF2A-7FF4-4364-8DCF-DCC1B190B9B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{E59C59F1-834A-45FC-AAC9-6947B99D5ED2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{885BA458-E8E9-4C2A-97E2-3B664A6ECB59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "Libs\ClassLib\ClassLib.csproj", "{DD433D38-D674-4FB8-A457-9C928CBB7E31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionLib", "Libs\CollectionLib\CollectionLib.csproj", "{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filelib", "Libs\Filelib\Filelib.csproj", "{41A7902B-6DF1-46A4-80D4-ED648925EF43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JournalLib", "Libs\JournalLib\JournalLib.csproj", "{876AE60E-0F34-4945-9F76-DE17D239DC31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +26,35 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{62EB201B-7BD7-4A79-9638-A9636914AB31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62EB201B-7BD7-4A79-9638-A9636914AB31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62EB201B-7BD7-4A79-9638-A9636914AB31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62EB201B-7BD7-4A79-9638-A9636914AB31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CFFBF2A-7FF4-4364-8DCF-DCC1B190B9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CFFBF2A-7FF4-4364-8DCF-DCC1B190B9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CFFBF2A-7FF4-4364-8DCF-DCC1B190B9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CFFBF2A-7FF4-4364-8DCF-DCC1B190B9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59C59F1-834A-45FC-AAC9-6947B99D5ED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59C59F1-834A-45FC-AAC9-6947B99D5ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59C59F1-834A-45FC-AAC9-6947B99D5ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59C59F1-834A-45FC-AAC9-6947B99D5ED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD433D38-D674-4FB8-A457-9C928CBB7E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD433D38-D674-4FB8-A457-9C928CBB7E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD433D38-D674-4FB8-A457-9C928CBB7E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD433D38-D674-4FB8-A457-9C928CBB7E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A7902B-6DF1-46A4-80D4-ED648925EF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A7902B-6DF1-46A4-80D4-ED648925EF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A7902B-6DF1-46A4-80D4-ED648925EF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A7902B-6DF1-46A4-80D4-ED648925EF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{876AE60E-0F34-4945-9F76-DE17D239DC31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{876AE60E-0F34-4945-9F76-DE17D239DC31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{876AE60E-0F34-4945-9F76-DE17D239DC31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{876AE60E-0F34-4945-9F76-DE17D239DC31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD433D38-D674-4FB8-A457-9C928CBB7E31} = {885BA458-E8E9-4C2A-97E2-3B664A6ECB59}
+		{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7} = {885BA458-E8E9-4C2A-97E2-3B664A6ECB59}
+		{41A7902B-6DF1-46A4-80D4-ED648925EF43} = {885BA458-E8E9-4C2A-97E2-3B664A6ECB59}
+		{876AE60E-0F34-4945-9F76-DE17D239DC31} = {885BA458-E8E9-4C2A-97E2-3B664A6ECB59}
 	EndGlobalSection
 EndGlobal
