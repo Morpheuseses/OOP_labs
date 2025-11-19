@@ -1,9 +1,10 @@
-using CollectionLib;
 using Lib;
+using System.Xml.Serialization;
 
-namespace EventLib;
+namespace CollectionLib;
 
-public class NewAssessmentTree<T> : BinarySearchTree<Assessment>
+[Serializable]
+public class NewAssessmentTree : BinarySearchTree<Assessment>
 {
     public event NewAssessmentTreeHandler? CollectionCountChanged;
     public event NewAssessmentTreeHandler? CollectionReferenceChanged;
@@ -13,7 +14,7 @@ public class NewAssessmentTree<T> : BinarySearchTree<Assessment>
     {
         Name = "Hehehoho tree";
     }
-    public NewAssessmentTree(NewAssessmentTree<T> btr) : base(btr)
+    public NewAssessmentTree(NewAssessmentTree btr) : base(btr)
     {
         Name = btr.Name;
     }
@@ -30,7 +31,7 @@ public class NewAssessmentTree<T> : BinarySearchTree<Assessment>
         OnCollectionCountChanged(this, new NewAssessmentTreeEventArgs(Name, "inserted", data));
         base.Add(data);
     }
-    public override void AddRange(Assessment[] data)
+    public override void AddRange(Assessment[]  data)
     {
         base.AddRange(data);
     }

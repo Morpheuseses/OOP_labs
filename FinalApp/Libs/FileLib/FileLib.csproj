@@ -3,7 +3,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ClassLib\ClassLib.csproj" />
     <ProjectReference Include="..\CollectionLib\CollectionLib.csproj" />
-    <ProjectReference Include="..\JournalLib\JournalLib.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

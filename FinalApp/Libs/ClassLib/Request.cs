@@ -2,7 +2,7 @@ using System;
 
 namespace Lib;
 
-public class Request
+public static class Request
 {
     private static readonly Random rand = new Random();
     public static void RandomInitObjects(ref Assessment[]? objects, int count)
@@ -30,6 +30,51 @@ public class Request
                     break;
             }
         }
+    }
+    public static Assessment[] RandomInitUniqueAssessments(int count)
+    {
+        var usedTitles = new HashSet<string>();
+        var result = new Assessment[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            Assessment assessment;
+
+            
+            switch (rand.Next(4))
+            {
+                case 0:
+                    assessment = new Assessment();
+                    break;
+                case 1:
+                    assessment = new Test();
+                    break;
+                case 2:
+                    assessment = new Exam();
+                    break;
+                case 3:
+                    assessment = new FinalExam();
+                    break;
+                default:
+                    assessment = new Assessment();
+                    break;
+            }
+
+            assessment.RandomInit();
+            
+            string title = assessment.Title;
+            while (usedTitles.Contains(title))
+            {
+                title = $"{title}_{rand.Next(0,1000)}"; 
+            } 
+
+            usedTitles.Add(title);
+            assessment.Title = title;
+
+            result[i] = assessment;
+        }
+
+        return result;
     }
     public static void ShowObjectsVirt(Assessment[] objects)
     {

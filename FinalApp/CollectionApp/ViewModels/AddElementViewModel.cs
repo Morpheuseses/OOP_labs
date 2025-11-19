@@ -1,16 +1,21 @@
 using System;
 using ReactiveUI;
+using CollectionLib;
+using CollectionApp;
+using Lib;
+using System.Threading;
 
 namespace CollectionApp.ViewModels.Pages;
 public class AddElementViewModel : ViewModelBase
 {
+    private NewAssessmentTree _tree;
 
-    public string? Title { get; set; }
-    public string? Date { get; set; }
+    public string Title { get; set; }
+    public DateTime Date { get; set; }
     public int DurationSeconds { get; set; }
     public int NumberOfQuestions { get; set; }
     public int NumberOfWrittenQuestions { get; set; }
-    public string? GraduationLevel { get; set; }
+    public Lib.GraduationLevel GraduationLevel { get; set; }
 
     private string? _selectedType;
     public string? SelectedType
@@ -19,35 +24,91 @@ public class AddElementViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _selectedType, value);
     }
 
+    private string? _selectedDegree;
+    public string? SelectedDegree
+    {
+        get => _selectedDegree;
+        set => this.RaiseAndSetIfChanged(ref _selectedDegree, value);
+    }
+
+    private string _errorMessage = "";
+    public string ErrorMessage
+    {
+        get => _errorMessage;
+        set 
+        { 
+            this.RaiseAndSetIfChanged(ref _errorMessage, value);
+            OnPropertyChanged();
+        }
+    }
 
     public RelayCommand SaveCommand { get; }
     public RelayCommand SaveRandomCommand { get; }
 
-    public AddElementViewModel()
+    public AddElementViewModel(NewAssessmentTree tree)
     {
+        _tree = tree;
         SaveCommand = new RelayCommand(SaveElement);
         SaveRandomCommand = new RelayCommand(SaveRandomElement);
     }
 
     private void SaveElement()
     {
+        ErrorMessage = "";
+        if (string.IsNullOrWhiteSpace(Title))
+            Title = "noname";
 
-        Console.WriteLine($"Added:\n" +
-                            $"Type={SelectedType}\n" +
-                            $"Title={Title}\n" +
-                            $"Date={Date}\n" +
-                            $"DurationSeconds={DurationSeconds}\n" +
-                            $"NumberOfQuestions={NumberOfQuestions}\n" +
-                            $"NumberOfWrittenQuestions={NumberOfWrittenQuestions}\n" +
-                            $"GraduationLevel={GraduationLevel}\n"
-                        );
+        Assessment newElement = null;
 
-        Title = "";
-        Date = "";
-        DurationSeconds = 0;
-        NumberOfQuestions = 0;
-        NumberOfWrittenQuestions = 0;
-        GraduationLevel = "";
+        try
+        {
+            switch (SelectedType)
+            {
+                case "Assessment":
+                    newElement = new Assessment(Title, Date, DurationSeconds);
+                    break;
+
+                case "Test":
+                    newElement = new Test(Title, Date, DurationSeconds, NumberOfQuestions);
+                    break;
+
+                case "Exam":
+                    newElement = new Exam(Title, Date, DurationSeconds, NumberOfQuestions, NumberOfWrittenQuestions);
+                    break;
+
+                case "FinalExam":
+                    GraduationLevel level = Lib.GraduationLevel.Bachelor; 
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(SelectedDegree))
+                            level = (GraduationLevel)Enum.Parse(typeof(GraduationLevel), SelectedDegree);
+                    }
+                    catch
+                    {
+                        Console.WriteLine($"Некорректная степень '{SelectedDegree}', используется по умолчанию: {level}");
+                        ErrorMessage = $"Некорректная степень '{SelectedDegree}', используется по умолчанию: {level}";
+                    }
+                    newElement = new FinalExam(Title, Date, DurationSeconds, NumberOfQuestions, NumberOfWrittenQuestions, level);
+                    break;
+
+                default:
+                    ErrorMessage = $"Неизвестный тип '{SelectedType}', создается обычный Assessment";
+                    Console.WriteLine($"Неизвестный тип '{SelectedType}', создается обычный Assessment");
+                    Date = DateTime.Now.AddDays(1);
+                    DurationSeconds = 1000;
+                    newElement = new Assessment(Title, Date, DurationSeconds);
+                    break;
+            }
+
+            if (newElement != null)
+                _tree.Add(newElement);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при создании элемента: {ex.Message}");
+            ErrorMessage = $"Ошибка при создании элемента: {ex.Message}";
+        }
+        
     }
     private void SaveRandomElement()
     {

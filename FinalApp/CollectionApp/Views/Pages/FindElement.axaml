@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CollectionApp.ViewModels.Pages"
+             x:Class="CollectionApp.Views.Pages.FindElement"
+             x:DataType="vm:FindElementViewModel">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="300,*" Margin="20">
+        <TextBlock Grid.Row="0" Text="Нахождения элемента" Foreground="{DynamicResource PrimaryForeground}" FontSize="25"/>
+        <TextBlock Text="Имя элемента:" 
+                   Grid.Row="1" Grid.Column="0" 
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource PrimaryForeground}"/>
+        <TextBox Text="{Binding Title, Mode=TwoWay}" 
+                 Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left"/>
+
+        <Button Content="Найти элемент"
+                Command="{Binding FindElementCommand}" 
+                Grid.Row="2" Grid.Column="1"
+                HorizontalAlignment="Left" 
+                Margin="0,10,0,0" 
+                Width="200"
+                Foreground="{DynamicResource PrimaryForeground}"/>
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" 
+                       Text="{Binding OutputText}" 
+                       Foreground="{DynamicResource PrimaryForeground}" 
+                       FontSize="14" 
+                       TextWrapping="Wrap" 
+                       Margin="0,10,0,0"
+                       MinHeight="20"/>
+    </Grid>
+</UserControl>

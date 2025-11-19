@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Lib;
 
+[Serializable]
 public class Exam : Test
 {
     int numberOfWrittenQuestions;
@@ -11,20 +13,30 @@ public class Exam : Test
         get { return this.numberOfWrittenQuestions; }
         set
         {
-            if (value > 0 && value <= this.NumberOfQuestions)
+            //if (value > 0 && value <= this.NumberOfQuestions)
                 this.numberOfWrittenQuestions = value;
-            else
-                throw new Exception($"{this.GetType().Name}'s number of written questions should be more than 0 and less than number of all questions");
+            //else
+            //    throw new Exception($"{this.GetType().Name}'s number of written questions should be more than 0 and less than number of all questions");
         }
     }
     public Exam() : base()
     {
         this.NumberOfWrittenQuestions = 1;
     }
+
     public Exam(string title, DateTime date, int duration, int numberOfQuestions, int numberOfWrittenQuestions) : base(title, date, duration, numberOfQuestions)
     {
         this.NumberOfWrittenQuestions = numberOfWrittenQuestions;
     }
+    //[JsonConstructor]
+    //public Exam(string title, DateTime date, int duration, int numberOfQuestions, int numberOfWrittenQuestions)
+    //{
+    //    this.Title = title;
+    //    this.Date = date;
+    //    this.DurationSeconds = duration;
+    //    this.NumberOfQuestions = numberOfQuestions;
+    //    this.NumberOfWrittenQuestions = numberOfWrittenQuestions;
+    //}
     public Exam(Exam other) : base(other)
     {
         this.NumberOfWrittenQuestions = other.NumberOfWrittenQuestions;

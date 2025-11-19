@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "Libs\ClassLib\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionLib", "Libs\CollectionLib\CollectionLib.csproj", "{2CB33A01-57B8-45D3-9DC9-AAF8BEDB6BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filelib", "Libs\Filelib\Filelib.csproj", "{41A7902B-6DF1-46A4-80D4-ED648925EF43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filelib", "Libs\FileLib\FileLib.csproj", "{41A7902B-6DF1-46A4-80D4-ED648925EF43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JournalLib", "Libs\JournalLib\JournalLib.csproj", "{876AE60E-0F34-4945-9F76-DE17D239DC31}"
 EndProject

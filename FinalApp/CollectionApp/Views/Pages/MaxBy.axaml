@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CollectionApp.ViewModels.Pages"
+             x:Class="CollectionApp.Views.Pages.MaxBy"
+             x:DataType="vm:MaxByViewModel">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="300,*" Margin="20">
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="Нахождение элемента по максимальному значению поля" 
+                   Foreground="{DynamicResource PrimaryForeground}" 
+                   FontSize="25" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Поля по которым будет выполняться запрос:" 
+                   Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                   Foreground="{DynamicResource PrimaryForeground}"/>
+
+        <ComboBox Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left"
+                  SelectedItem="{Binding FieldType, Mode=TwoWay}">
+            <ComboBox.Items>
+                <x:String>Date</x:String>
+                <x:String>Title</x:String>
+                <x:String>Duration</x:String>
+                <x:String>Number Of questions</x:String>
+            </ComboBox.Items>
+        </ComboBox>
+
+        <Button Content="Выполнить запрос"
+                Command="{Binding RequestCommand}" 
+                Grid.Row="2" Grid.Column="1"
+                HorizontalAlignment="Left" 
+                Margin="0,10,0,0" Width="200"
+                Foreground="{DynamicResource PrimaryForeground}"/>
+
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" 
+                   Text="{Binding OutputText}" 
+                   Foreground="{DynamicResource PrimaryForeground}" 
+                   FontSize="14" TextWrapping="Wrap" 
+                   Margin="0,10,0,0" MinHeight="20"/>
+    </Grid>
+</UserControl>

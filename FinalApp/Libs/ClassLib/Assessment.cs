@@ -1,14 +1,27 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 namespace Lib;
 
 // test, Assessment, exam, final exam
 // Assessment <- Test <- Exam <- FinalExam
+
+[JsonDerivedType(typeof(Test), "Test")]
+[JsonDerivedType(typeof(Exam), "Exam")]
+[JsonDerivedType(typeof(FinalExam), "FinalExam")]
+[XmlInclude(typeof(Assessment))]
+[XmlInclude(typeof(Test))]
+[XmlInclude(typeof(Exam))]
+[XmlInclude(typeof(FinalExam))]
+[Serializable]
 public class Assessment : IInit, ICloneable, IComparable
 {
     string title;
     DateTime date;
     int durationSeconds;
+
+    [NonSerialized]
     protected static readonly Random rand = new Random();
     public string Title
     {
@@ -43,7 +56,21 @@ public class Assessment : IInit, ICloneable, IComparable
                 throw new Exception($"{this.GetType().Name}'s duration should last more than 0 seconds and less than 6 hours");
         }
     }
-    public Dictionary<string, int?> Marks { get; set; }
+
+    [NonSerialized]
+    [XmlIgnore]
+    [JsonIgnore]
+    private Dictionary<string, int?> marks;
+    [XmlIgnore]
+    [JsonIgnore]
+    public Dictionary<string, int?> Marks 
+    { 
+        get => marks; 
+        set
+        {
+            marks = value;   
+        }
+    }
     public Assessment()
     {
         this.Title = "None";

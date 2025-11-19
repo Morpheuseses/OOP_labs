@@ -2,7 +2,7 @@ using Lib;
 using System;
 using System.Collections.Generic;
 
-namespace EventLib;
+namespace CollectionLib;
 
 public delegate void NewAssessmentTreeHandler(object source, NewAssessmentTreeEventArgs args);
 public class NewAssessmentTreeEventArgs : EventArgs
@@ -15,7 +15,7 @@ public class NewAssessmentTreeEventArgs : EventArgs
     {
         this.Name = name;
         this.EventType = eventType;
-        this.Object = changedObject ?? default!;
+        this.Object = changedObject;
     }
     public override string ToString()
     {

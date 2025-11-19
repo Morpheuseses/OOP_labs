@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Lib;
 
+[Serializable]
 public class Test : Assessment, IInit, ICloneable, IComparable
 {
     int numberOfQuestions;

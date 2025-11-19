@@ -9,6 +9,8 @@ public enum GraduationLevel
     Master,
     PhD
 }
+
+[Serializable]
 public class FinalExam : Exam
 {
     public GraduationLevel GraduationLevel { get; set; }

@@ -1,0 +1,132 @@
+[
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 11,
+    "NumberOfQuestions": 20,
+    "Title": "SystemModeling",
+    "Date": "2028-03-05T03:01:54.3229434+05:00",
+    "DurationSeconds": 2,
+    "Marks": {
+      "Object Type: Student Name: John Surname: Johnson Year: 2 ": 4,
+      "Object Type: Student Name: Alex Surname: Moley Year: 7 ": 5,
+      "Object Type: Student Name: John Surname: Johnson Year: 7 ": 5,
+      "Object Type: Student Name: Maria Surname: Smith Year: 1 ": 5
+    }
+  },
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 11,
+    "NumberOfQuestions": 37,
+    "Title": "DiscreteMath",
+    "Date": "2027-07-07T11:12:54.3230526+05:00",
+    "DurationSeconds": 14811,
+    "Marks": {
+      "Object Type: Student Name: Maria Surname: Johnson Year: 8 ": 3,
+      "Object Type: Student Name: Matthew Surname: Wilson Year: 4 ": 5,
+      "Object Type: Student Name: Mark Surname: Johnson Year: 2 ": 3
+    }
+  },
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 10,
+    "NumberOfQuestions": 17,
+    "Title": "ComputerGraphics",
+    "Date": "2028-10-20T04:09:54.3237748+05:00",
+    "DurationSeconds": 12374,
+    "Marks": {
+      "Object Type: Student Name: Matthew Surname: Wilson Year: 3 ": 0,
+      "Object Type: Student Name: Alex Surname: Smith Year: 6 ": 4,
+      "Object Type: Student Name: John Surname: Smith Year: 3 ": 4
+    }
+  },
+  {
+    "$type": "FinalExam",
+    "GraduationLevel": 3,
+    "NumberOfWrittenQuestions": 1,
+    "NumberOfQuestions": 1,
+    "Title": "Programming",
+    "Date": "2028-02-28T17:28:54.3236004+05:00",
+    "DurationSeconds": 12778,
+    "Marks": {
+      "Object Type: Student Name: Matthew Surname: Johnson Year: 5 ": 4,
+      "Object Type: Student Name: Matthew Surname: Wilson Year: 6 ": 3,
+      "Object Type: Student Name: Mark Surname: Johnson Year: 1 ": 4,
+      "Object Type: Student Name: Carl Surname: Wilson Year: 4 ": 5,
+      "Object Type: Student Name: Carl Surname: Moley Year: 3 ": 5,
+      "Object Type: Student Name: Matthew Surname: Wilson Year: 4 ": 0
+    }
+  },
+  {
+    "Title": "DiscreteMath_869",
+    "Date": "2026-10-24T21:05:54.323756+05:00",
+    "DurationSeconds": 14984,
+    "Marks": {
+      "Object Type: Student Name: Mark Surname: Wilson Year: 3 ": 5,
+      "Object Type: Student Name: Mark Surname: Johnson Year: 1 ": 5,
+      "Object Type: Student Name: Alex Surname: Wilson Year: 6 ": 3
+    }
+  },
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 4,
+    "NumberOfQuestions": 7,
+    "Title": "OOP",
+    "Date": "2027-07-15T06:35:54.3237776+05:00",
+    "DurationSeconds": 9027,
+    "Marks": {
+      "Object Type: Student Name: Maria Surname: Moley Year: 8 ": 4
+    }
+  },
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 1,
+    "NumberOfQuestions": 1,
+    "Title": "Math",
+    "Date": "2025-12-03T03:16:54.3237858+05:00",
+    "DurationSeconds": 19367,
+    "Marks": {
+      "Object Type: Student Name: Carl Surname: Johnson Year: 5 ": 4,
+      "Object Type: Student Name: Carl Surname: Wilson Year: 5 ": 3,
+      "Object Type: Student Name: Mark Surname: Smith Year: 3 ": 0,
+      "Object Type: Student Name: Matthew Surname: Johnson Year: 4 ": 0,
+      "Object Type: Student Name: Alex Surname: Wilson Year: 2 ": 3
+    }
+  },
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 39,
+    "NumberOfQuestions": 49,
+    "Title": "Engineering",
+    "Date": "2026-01-24T17:27:54.3237986+05:00",
+    "DurationSeconds": 8072,
+    "Marks": {
+      "Object Type: Student Name: John Surname: Johnson Year: 5 ": 5
+    }
+  },
+  {
+    "$type": "Test",
+    "NumberOfQuestions": 6,
+    "Title": "OOP_184",
+    "Date": "2028-05-20T10:19:54.3238039+05:00",
+    "DurationSeconds": 6997,
+    "Marks": {
+      "Object Type: Student Name: Mark Surname: Holey Year: 2 ": 5,
+      "Object Type: Student Name: Maria Surname: Johnson Year: 2 ": 5,
+      "Object Type: Student Name: Alex Surname: Holey Year: 5 ": 0
+    }
+  },
+  {
+    "$type": "Exam",
+    "NumberOfWrittenQuestions": 22,
+    "NumberOfQuestions": 27,
+    "Title": "SystemModeling_374",
+    "Date": "2028-04-06T03:41:54.3237938+05:00",
+    "DurationSeconds": 5244,
+    "Marks": {
+      "Object Type: Student Name: Alex Surname: Johnson Year: 7 ": 3,
+      "Object Type: Student Name: Alex Surname: Moley Year: 6 ": 4,
+      "Object Type: Student Name: Mark Surname: Holey Year: 4 ": 3,
+      "Object Type: Student Name: John Surname: Johnson Year: 7 ": 5
+    }
+  }
+]

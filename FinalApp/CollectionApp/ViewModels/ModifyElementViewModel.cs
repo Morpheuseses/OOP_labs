@@ -1,16 +1,57 @@
 using System;
 using ReactiveUI;
+using CollectionLib;
+using CollectionApp;
+using Lib;
+using System.Threading;
 
 namespace CollectionApp.ViewModels.Pages;
+
 public class ModifyElementViewModel : ViewModelBase
 {
+    private NewAssessmentTree _tree;
 
-    public string? Title { get; set; }
-    public string? Date { get; set; }
-    public int DurationSeconds { get; set; }
-    public int NumberOfQuestions { get; set; }
-    public int NumberOfWrittenQuestions { get; set; }
-    public string? GraduationLevel { get; set; }
+    private string _title = "";
+    public string Title
+    {
+        get => _title;
+        set => this.RaiseAndSetIfChanged(ref _title, value);
+    }
+
+    private DateTime _date = DateTime.Now;
+    public DateTime Date
+    {
+        get => _date;
+        set => this.RaiseAndSetIfChanged(ref _date, value);
+    }
+
+    private int _durationSeconds;
+    public int DurationSeconds
+    {
+        get => _durationSeconds;
+        set => this.RaiseAndSetIfChanged(ref _durationSeconds, value);
+    }
+
+    private int _numberOfQuestions;
+    public int NumberOfQuestions
+    {
+        get => _numberOfQuestions;
+        set => this.RaiseAndSetIfChanged(ref _numberOfQuestions, value);
+    }
+
+    private int _numberOfWrittenQuestions;
+    public int NumberOfWrittenQuestions
+    {
+        get => _numberOfWrittenQuestions;
+        set => this.RaiseAndSetIfChanged(ref _numberOfWrittenQuestions, value);
+    }
+
+    private GraduationLevel _graduationLevel = GraduationLevel.Bachelor;
+    public GraduationLevel GraduationLevel
+    {
+        get => _graduationLevel;
+        set => this.RaiseAndSetIfChanged(ref _graduationLevel, value);
+    }
 
     private string? _selectedType;
     public string? SelectedType
@@ -19,40 +60,75 @@ public class ModifyElementViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _selectedType, value);
     }
 
+    private string? _selectedDegree;
+    public string? SelectedDegree
+    {
+        get => _selectedDegree;
+        set => this.RaiseAndSetIfChanged(ref _selectedDegree, value);
+    }
+
+    private string _errorMessage = "";
+    public string ErrorMessage
+    {
+        get => _errorMessage;
+        set {
+            this.RaiseAndSetIfChanged(ref _errorMessage, value);
+            OnPropertyChanged();
+        }
+    }
 
     public RelayCommand SaveCommand { get; }
-    public RelayCommand SaveRandomCommand { get; }
 
-    public ModifyElementViewModel()
+    public ModifyElementViewModel(NewAssessmentTree tree)
     {
-        SaveCommand = new RelayCommand(SaveElement);
-        SaveRandomCommand = new RelayCommand(SaveRandomElement);
+        _tree = tree;
+        SaveCommand = new RelayCommand(UpdateElement);
     }
 
-    private void SaveElement()
+    private void UpdateElement()
     {
+        ErrorMessage = "";
 
-        Console.WriteLine($"Added:\n" +
-                            $"Type={SelectedType}\n" +
-                            $"Title={Title}\n" +
-                            $"Date={Date}\n" +
-                            $"DurationSeconds={DurationSeconds}\n" +
-                            $"NumberOfQuestions={NumberOfQuestions}\n" +
-                            $"NumberOfWrittenQuestions={NumberOfWrittenQuestions}\n" +
-                            $"GraduationLevel={GraduationLevel}\n"
-                        );
+        try
+        {
+            var node = _tree.FindNodeByTitle(Title, _tree.RootNode);
 
-        Title = "";
-        Date = "";
-        DurationSeconds = 0;
-        NumberOfQuestions = 0;
-        NumberOfWrittenQuestions = 0;
-        GraduationLevel = "";
+            if (node == null)
+            {
+                ErrorMessage = $"Элемент с названием '{Title}' не найден";
+                return;
+            }
+
+            Assessment updated = null;
+
+            if (SelectedType == "Assessment" && node.Data is Assessment)
+            {
+                updated = new Assessment(Title, Date, DurationSeconds);
+            }
+            else if (SelectedType == "Test" && node.Data is Test)
+            {
+                updated = new Test(Title, Date, DurationSeconds, NumberOfQuestions);
+            }
+            else if (SelectedType == "Exam" && node.Data is Exam)
+            {
+                updated = new Exam(Title, Date, DurationSeconds, NumberOfQuestions, NumberOfWrittenQuestions);
+            }
+            else if (SelectedType == "FinalExam" && node.Data is FinalExam)
+            {
+                updated = new FinalExam(Title, Date, DurationSeconds, NumberOfQuestions, NumberOfWrittenQuestions, GraduationLevel);
+            }
+            else
+            {
+                ErrorMessage = "Неверный тип или несоответствие существующего объекта.";
+                return;
+            }
+
+            node.Data = updated; // заменяем данные в дереве
+            Console.WriteLine($"Элемент '{Title}' обновлен");
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Ошибка при обновлении элемента: {ex.Message}";
+        }
     }
-    private void SaveRandomElement()
-    {
-        Console.WriteLine("Добавлен случайный элемент");
-    }
-    
 }
-

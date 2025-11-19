@@ -4,44 +4,55 @@
              x:Class="CollectionApp.Views.Pages.AddElement"
              x:DataType="vm:AddElementViewModel">
     
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="300,*" Margin="20" >
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="300,*" Margin="20">
 
-        <TextBlock Grid.Row="0" Text="Добавление элемента" Foreground="{DynamicResource PrimaryForeground}" FontSize="25"/>
-        <!-- Name -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="Добавление элемента" 
+                   Foreground="{DynamicResource PrimaryForeground}" 
+                   FontSize="25" Margin="0,0,0,10"/>
+
         <TextBlock Text="Наименование:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
         <TextBox Text="{Binding Title, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" />
 
-        <!-- Date -->
-        <TextBlock Text="Дата(ГГГГ-ММ-ДД):" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"  Foreground="{DynamicResource PrimaryForeground}"/>
-        <TextBox Text="{Binding Date, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Width="100" HorizontalAlignment="Left"/>
+        <TextBlock Text="Дата:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
+        <TextBox Text="{Binding Date, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Width="175" HorizontalAlignment="Left"/>
 
-        <!-- Duration -->
-        <TextBlock Text="Длительность(в секундах):" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
+        <TextBlock Text="Длительность (сек):" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
         <TextBox Text="{Binding DurationSeconds, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" />
-        
-        <!-- Questions -->
+
         <TextBlock Text="Количество вопросов:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
         <TextBox Text="{Binding NumberOfQuestions, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" />
-        
-        <!-- Written Questions -->
+
         <TextBlock Text="Количество письменных вопросов:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
         <TextBox Text="{Binding NumberOfWrittenQuestions, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" />
 
-        <!-- Graduation level -->
         <TextBlock Text="Ученая степень:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
-        <TextBox Text="{Binding GraduationLevel, Mode=TwoWay}" Grid.Row="6" Grid.Column="1" Width="100" HorizontalAlignment="Left"/>
-        
-        <TextBlock Text="Тип элемента:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
-        <ComboBox Grid.Row="7" Grid.Column="1"
-          SelectedItem="{Binding SelectedType, Mode=TwoWay}">
-          <ComboBox.Items>
-           <x:String>Assessment</x:String>
-           <x:String>Test</x:String>
-           <x:String>Exam</x:String>
-           <x:String>FinalExam</x:String>
-          </ComboBox.Items>
+        <ComboBox Grid.Row="6" Grid.Column="1" SelectedItem="{Binding SelectedDegree, Mode=TwoWay}">
+            <ComboBox.Items>
+                <x:String>Bachelor</x:String>
+                <x:String>Master</x:String>
+                <x:String>PhD</x:String>
+            </ComboBox.Items>
         </ComboBox>
-        <!-- Save button -->
+
+        <TextBlock Text="Тип элемента:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
+        <ComboBox Grid.Row="7" Grid.Column="1" SelectedItem="{Binding SelectedType, Mode=TwoWay}">
+            <ComboBox.Items>
+                <x:String>Assessment</x:String>
+                <x:String>Test</x:String>
+                <x:String>Exam</x:String>
+                <x:String>FinalExam</x:String>
+            </ComboBox.Items>
+        </ComboBox>
+
+        <TextBlock Grid.Row="9" Grid.ColumnSpan="2" 
+                   Text="{Binding ErrorMessage}" 
+                   Foreground="Red" 
+                   FontSize="14" 
+                   TextWrapping="Wrap" 
+                   Margin="0,10,0,0"
+                   MinHeight="20"/>
+
         <Button Content="Добавить элемент" Command="{Binding SaveCommand}" Grid.Row="8" Grid.Column="0"
                 HorizontalAlignment="Left" Margin="0,10,0,0" Width="200" Foreground="{DynamicResource PrimaryForeground}"/>
         <Button Content="Сгенерировать элемент" Command="{Binding SaveRandomCommand}" Grid.Row="8" Grid.Column="1"

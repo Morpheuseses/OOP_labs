@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAssessment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Assessment xsi:type="Exam">
+    <Title>Math</Title>
+    <Date>2027-04-26T01:35:42.1308293+05:00</Date>
+    <DurationSeconds>4820</DurationSeconds>
+    <NumberOfQuestions>29</NumberOfQuestions>
+    <NumberOfWrittenQuestions>16</NumberOfWrittenQuestions>
+  </Assessment>
+  <Assessment xsi:type="Exam">
+    <Title>ComputerGraphics</Title>
+    <Date>2027-12-07T12:45:42.1309918+05:00</Date>
+    <DurationSeconds>14979</DurationSeconds>
+    <NumberOfQuestions>22</NumberOfQuestions>
+    <NumberOfWrittenQuestions>14</NumberOfWrittenQuestions>
+  </Assessment>
+  <Assessment xsi:type="Test">
+    <Title>DiscreteMath</Title>
+    <Date>2026-02-28T05:09:42.1310029+05:00</Date>
+    <DurationSeconds>13004</DurationSeconds>
+    <NumberOfQuestions>10</NumberOfQuestions>
+  </Assessment>
+  <Assessment xsi:type="FinalExam">
+    <Title>Engineering</Title>
+    <Date>2028-04-21T07:22:42.1313201+05:00</Date>
+    <DurationSeconds>10619</DurationSeconds>
+    <NumberOfQuestions>46</NumberOfQuestions>
+    <NumberOfWrittenQuestions>31</NumberOfWrittenQuestions>
+    <GraduationLevel>Master</GraduationLevel>
+  </Assessment>
+  <Assessment xsi:type="Test">
+    <Title>Engineering_926</Title>
+    <Date>2026-01-21T18:03:42.1314806+05:00</Date>
+    <DurationSeconds>15257</DurationSeconds>
+    <NumberOfQuestions>17</NumberOfQuestions>
+  </Assessment>
+  <Assessment>
+    <Title>OOP</Title>
+    <Date>2028-04-09T01:35:42.1309824+05:00</Date>
+    <DurationSeconds>10761</DurationSeconds>
+  </Assessment>
+  <Assessment xsi:type="Exam">
+    <Title>Math_566</Title>
+    <Date>2028-08-27T07:46:42.1310119+05:00</Date>
+    <DurationSeconds>10911</DurationSeconds>
+    <NumberOfQuestions>7</NumberOfQuestions>
+    <NumberOfWrittenQuestions>6</NumberOfWrittenQuestions>
+  </Assessment>
+  <Assessment xsi:type="Exam">
+    <Title>Programming</Title>
+    <Date>2026-02-06T07:57:42.1309987+05:00</Date>
+    <DurationSeconds>14726</DurationSeconds>
+    <NumberOfQuestions>41</NumberOfQuestions>
+    <NumberOfWrittenQuestions>20</NumberOfWrittenQuestions>
+  </Assessment>
+  <Assessment xsi:type="Exam">
+    <Title>Physics</Title>
+    <Date>2026-08-13T15:38:42.1314863+05:00</Date>
+    <DurationSeconds>623</DurationSeconds>
+    <NumberOfQuestions>19</NumberOfQuestions>
+    <NumberOfWrittenQuestions>17</NumberOfWrittenQuestions>
+  </Assessment>
+  <Assessment xsi:type="Exam">
+    <Title>Physics_825</Title>
+    <Date>2026-02-11T22:10:42.1314911+05:00</Date>
+    <DurationSeconds>6788</DurationSeconds>
+    <NumberOfQuestions>39</NumberOfQuestions>
+    <NumberOfWrittenQuestions>29</NumberOfWrittenQuestions>
+  </Assessment>
+</ArrayOfAssessment>

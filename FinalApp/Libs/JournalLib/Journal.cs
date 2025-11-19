@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using CollectionLib;
 using Lib;
 
-namespace EventLib;
+namespace JournalLib;
 
+[Serializable]
 public class Journal
 {
     private List<JournalEntry> entries;
@@ -22,7 +23,7 @@ public class Journal
         {
             return $"Collection name: {Name}\n"
             + $"Collection change type: {EventType}\n"
-            + $"Collection object information: {ObjectInfo}\n";
+            + $"Collection object information: \n{ObjectInfo}\n";
         }
     }
     public Journal()
@@ -31,11 +32,13 @@ public class Journal
     }
     public void CollectionCountChanged(object source, NewAssessmentTreeEventArgs args)
     {
-        entries.Add(new JournalEntry(args.Name, args.EventType, source.ToString().Replace("\n", " ").Replace("-", "")));
+        var objectInfo = args.Object?.ToString() ?? "null";
+        entries.Add(new JournalEntry(args.Name, args.EventType, objectInfo));
     }
     public void CollectionReferenceChanged(object source, NewAssessmentTreeEventArgs args)
     {
-        entries.Add(new JournalEntry(args.Name, args.EventType, source.ToString().Replace("\n", " ").Replace("-", "")));
+        var objectInfo = args.Object?.ToString() ?? "null";
+        entries.Add(new JournalEntry(args.Name, args.EventType, objectInfo));
     }
     public override string ToString()
     {

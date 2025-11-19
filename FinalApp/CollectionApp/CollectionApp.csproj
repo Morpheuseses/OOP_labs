@@ -30,5 +30,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Libs\ClassLib\ClassLib.csproj" />
     <ProjectReference Include="..\Libs\CollectionLib\CollectionLib.csproj" />
+    <ProjectReference Include="..\Libs\JournalLib\JournalLib.csproj" />
+    <ProjectReference Include="..\Libs\FileLib\FileLib.csproj" />
+    <ProjectReference Include="..\Libs\MethodsLib\MethodsLib.csproj" />
   </ItemGroup>
 </Project>
