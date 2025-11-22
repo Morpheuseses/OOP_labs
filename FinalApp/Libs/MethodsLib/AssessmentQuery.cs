@@ -18,16 +18,11 @@ public static class AssessmentQuery
         return items.OrderByDescending(selector).FirstOrDefault();
     }
 
-    public static IEnumerable<Assessment> TopN<T>(
-        IEnumerable<Assessment> items,
-        int n,
-        Func<Assessment, bool> filter,
-        Func<Assessment, T> selector)
-        where T : IComparable<T>
+    public static IEnumerable<(Type Type, int Count)> CountBySubclass(IEnumerable<Assessment> items)
     {
-        return items
-            .Where(filter)
-            .OrderBy(selector)
-            .Take(n);
+        var query = from a in items
+                    group a by a.GetType() into g
+                    select (Type: g.Key, Count: g.Count());
+        return query;
     }
 }

@@ -7,10 +7,8 @@ using System.Threading;
 
 namespace CollectionApp.ViewModels.Pages;
 
-public class ModifyElementViewModel : ViewModelBase
+public class ModifyElementViewModel : ViewModelPageBase
 {
-    private NewAssessmentTree _tree;
-
     private string _title = "";
     public string Title
     {
@@ -67,16 +65,6 @@ public class ModifyElementViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _selectedDegree, value);
     }
 
-    private string _errorMessage = "";
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set {
-            this.RaiseAndSetIfChanged(ref _errorMessage, value);
-            OnPropertyChanged();
-        }
-    }
-
     public RelayCommand SaveCommand { get; }
 
     public ModifyElementViewModel(NewAssessmentTree tree)
@@ -123,7 +111,7 @@ public class ModifyElementViewModel : ViewModelBase
                 return;
             }
 
-            node.Data = updated; // заменяем данные в дереве
+            node.Data = updated; 
             Console.WriteLine($"Элемент '{Title}' обновлен");
         }
         catch (Exception ex)

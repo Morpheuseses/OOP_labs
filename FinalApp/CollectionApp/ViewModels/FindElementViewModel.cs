@@ -5,9 +5,8 @@ using Lib;
 
 namespace CollectionApp.ViewModels.Pages;
 
-public class FindElementViewModel : ViewModelBase
+public class FindElementViewModel : ViewModelPageBase
 {
-    private NewAssessmentTree _tree;
     private string? _title;
     public string? Title
     {
@@ -21,20 +20,7 @@ public class FindElementViewModel : ViewModelBase
             }
         }
     }
-    private string? _outputText;
-    public string? OutputText
-    {
-        get => _outputText;
-        set
-        {
-            if (_outputText != value)
-            {
-                _outputText = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    public ICommand FindElementCommand { get; }
+    private ICommand FindElementCommand { get; }
     public FindElementViewModel(NewAssessmentTree tree)
     {
         _tree = tree;

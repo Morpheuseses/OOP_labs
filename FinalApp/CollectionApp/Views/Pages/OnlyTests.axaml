@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CollectionApp.ViewModels.Pages"
+             x:Class="CollectionApp.Views.Pages.OnlyTests"
+             x:DataType="vm:OnlyTestsViewModel">
+    <ScrollViewer>
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="300,*" Margin="20">
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="Показать все тесты" 
+                   Foreground="{DynamicResource PrimaryForeground}" 
+                   FontSize="25" Margin="0,0,0,10"/>
+        <Button Content="Выполнить фильтрацию"
+                Command="{Binding RequestCommand}" 
+                Grid.Row="1" Grid.Column="0"
+                HorizontalAlignment="Left" 
+                Margin="0,10,0,0" Width="200"
+                Foreground="{DynamicResource PrimaryForeground}"/>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" 
+                   Text="{Binding OutputText}" 
+                   Foreground="{DynamicResource PrimaryForeground}" 
+                   FontSize="14" TextWrapping="Wrap" 
+                   Margin="0,10,0,0" MinHeight="20"/>
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" 
+                   Text="{Binding ErrorMessage}" 
+                   Foreground="Red" 
+                   FontSize="14" 
+                   TextWrapping="Wrap" 
+                   Margin="0,10,0,0"
+                   MinHeight="20"/>
+    </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -1,4 +1,4 @@
-﻿namespace CollectionApp.ViewModels;
+﻿
 
 using System;
 using Avalonia.Controls;
@@ -13,7 +13,7 @@ using ReactiveUI;
 using System.Reactive;
 using static System.Net.Mime.MediaTypeNames;
 
-
+using CollectionApp.Helpers;
 using CollectionLib;
 using JournalLib;
 using MethodsLib;
@@ -21,9 +21,14 @@ using Lib;
 using FileLib;
 using CollectionApp.Views.Pages;
 
-public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
+namespace CollectionApp.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase
 {
     public string AppName { get; } = "CollectionApp";
+
+    private static string filePathReport = "/media/Crossdrive/university/OOP/ActualStuff/Implementation/FinalApp/CollectionApp/Saves/Reports/actual_report.txt"; 
+    private static string filePathJournal = "/media/Crossdrive/university/OOP/ActualStuff/Implementation/FinalApp/CollectionApp/Saves/Journal/actual_journal.txt"; 
 
     private static NewAssessmentTree _tree;
     public static NewAssessmentTree Tree 
@@ -35,8 +40,8 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
-    private static Journal _journal;
-    public static Journal Journal 
+    private static JournalTxt _journal;
+    public static JournalTxt Journal 
     {
         get => _journal; 
         set
@@ -92,22 +97,10 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     }
 
     private HomePageViewModel _homePage;
-    private AddElementViewModel _addElementPage;
-    private RemoveElementViewModel _removeElementPage;
-    private ModifyElementViewModel _modifyElementPage;
-    private ShowCollectionViewModel _showCollectionPage;
-    private ShowJournalViewModel _showJournalPage;
-    private RandomInitViewModel _randomInitPage;
-    private FindElementViewModel _findElementPage;
-    private MinByViewModel _minbyPage;
 
-    public ObservableCollection<string> Files { get; } = new ObservableCollection<string>();
+    //public ObservableCollection<string> Files { get; } = new ObservableCollection<string>();
 
     public ReactiveCommand<Window, Unit> OpenFilesCommand { get; }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     
     public ObservableCollection<Node> Nodes { get; }
     public ObservableCollection<Node> SelectedNodes { get; }
@@ -116,55 +109,43 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         StatusText = "Открыт файл";
         Console.WriteLine("Открытие файла...");  
-        var dialog = new OpenFileDialog
+
+        try
         {
-            AllowMultiple = false,
-            Filters =
+            var tree = await FileDialogsHelper.OpenFileCollectionAsync(parent);
+            if (tree != null)
             {
-                new FileDialogFilter { Name = "All Supported", Extensions = { "json", "xml", "bin" } }
+                Tree = tree;
+                StatusText = "Файл успешно открыт";
+                Console.WriteLine("Файл успешно открыт");
             }
-        };
-
-        var result = await dialog.ShowAsync(parent);
-        var path = result?.FirstOrDefault();
-        if (path == null) return;
-
-        IFileSerializer<NewAssessmentTree> serializer = path switch
+            else
+            {
+                StatusText = "Открытие файла отменено";
+                Console.WriteLine("Открытие файла отменено");
+            }
+        }
+        catch (Exception ex)
         {
-            var p when p.EndsWith(".json") => new JsonSerializerWrapper<NewAssessmentTree>(),
-            var p when p.EndsWith(".xml")  => new XmlSerializerWrapper<NewAssessmentTree>(),
-            var p when p.EndsWith(".bin")  => new BinSerializer<NewAssessmentTree>(),
-            _ => throw new Exception("Неизвестный формат файла")
-        };
-
-        Tree = serializer.Load(path);
+            StatusText = $"Ошибка при открытии файла: {ex.Message}";
+            Console.WriteLine($"Ошибка при открытии файла: {ex}");
+        }
     }
     public async void SaveFileCollection(Window parent)
     {
         StatusText = "Сохранение файла";
         Console.WriteLine("Сохранение файла...");
-        var dialog = new SaveFileDialog
+        try
         {
-            Filters =
-            {
-                new FileDialogFilter { Name = "JSON", Extensions = { "json" } },
-                new FileDialogFilter { Name = "XML", Extensions = { "xml" } },
-                new FileDialogFilter { Name = "Binary", Extensions = { "bin" } }
-            }
-        };
-
-        var path = await dialog.ShowAsync(parent);
-        if (path == null) return;
-
-        IFileSerializer<NewAssessmentTree> serializer = path switch
+            await FileDialogsHelper.SaveFileCollectionAsync(parent, Tree);
+            StatusText = "Файл успешно сохранён";
+            Console.WriteLine("Файл успешно сохранён");
+        }
+        catch (Exception ex)
         {
-            var p when p.EndsWith(".json") => new JsonSerializerWrapper<NewAssessmentTree>(),
-            var p when p.EndsWith(".xml")  => new XmlSerializerWrapper<NewAssessmentTree>(),
-            var p when p.EndsWith(".bin")  => new BinSerializer<NewAssessmentTree>(),
-            _ => throw new Exception("Неизвестный формат файла")
-        };
-
-        serializer.Save(path, Tree);
+            StatusText = $"Ошибка при сохранении файла: {ex.Message}";
+            Console.WriteLine($"Ошибка при сохранении файла: {ex}");
+        }
     }
     private void ShowCollection()
     {
@@ -185,15 +166,37 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         Console.WriteLine("Openning ShowJournal page");
         CurrentPage = new ShowJournalViewModel(Journal);
     }
-    private void SaveJournal(Window parent)
+    private async void SaveJournal(Window parent)
     {
+        StatusText = "Сохранение журнала...";
+        Console.WriteLine("Saving journal...");
+
+        FileDialogsHelper.SaveJournalAsync(parent, Journal);
         StatusText = "Журнал сохранен.";
-        Console.WriteLine("Журнал сохранен.");
     }
-    private void OpenJournal(Window parent)
+    private async void OpenJournal(Window parent)
     {
-        StatusText = "Журнал открыт.";
-        Console.WriteLine("Журнал открыт.");
+        try
+        {
+            StatusText = "Открытие журнала.";
+            Console.WriteLine("Opening journal...");
+
+            var journal = await FileDialogsHelper.OpenJournalAsync(parent);
+            if (journal != null)
+            {
+                Journal = journal;
+                StatusText = "Журнал открыт.";
+            }
+            else
+            {
+                StatusText = "Открытие журнала отменено.";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusText = $"Ошибка при открытии журнала: {ex.Message}";
+            Console.WriteLine(ex);
+        }
     }
 
     private void AddCollectionItem()
@@ -211,13 +214,13 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     }
     private void RemoveCollectionItem()
     {
-        CurrentPage = _removeElementPage;
+        CurrentPage = new RemoveElementViewModel(Tree);
         StatusText = "Удаление элемента";
         Console.WriteLine("Openning RemoveElement page...");
     }
     private void FindCollectionItem()
     {
-        CurrentPage = _findElementPage;
+        CurrentPage = new FindElementViewModel(Tree);
         StatusText = "Поиск элемента";
         Console.WriteLine("Openning FindElement page...");
     }
@@ -227,13 +230,14 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         StatusText = "Генерируем новые значения.";
         //Assessment[]? elements = null;
         //Request.RandomInitObjects(ref elements, 10);
-        CurrentPage = _randomInitPage;
+        CurrentPage = new RandomInitViewModel(Tree);
         StatusText = "Коллекция была сгенерирована со случайными значениями.";
     }
-    private void RemoveJournal()
+    private void ShowReport()
     {
-        StatusText = "Журнал удалён.";
-        Console.WriteLine("Журнал удалён.");
+        Console.WriteLine("Openning Report page...");
+        StatusText = "Открываю отчет...";
+        CurrentPage = new ShowReportViewModel(filePathReport);
     }
     private void OpenMainPage()
     {
@@ -248,81 +252,48 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     private void MinBy()
     {
         Console.WriteLine("MinBy\n");
-        CurrentPage = _minbyPage;
+        CurrentPage = new MinByViewModel(Tree,filePathReport);
     }
     private void MaxBy()
     {
         Console.WriteLine("MaxBy\n");
-        CurrentPage = _minbyPage;
+        CurrentPage = new MaxByViewModel(Tree,filePathReport);
     }
-    private void TopN()
+    private void CountBySubclass()
     {
-        Console.WriteLine("TopN\n");
-        var items = AssessmentQuery.TopN(Tree, 5,a => a.DurationSeconds > 80,  a => a.DurationSeconds);
-        
-        foreach (var a in items)
-        {
-            Console.WriteLine($"{a.Title} - {a.DurationSeconds}");
-        }
+        Console.WriteLine("CountBySubclass\n");
+        CurrentPage = new CountBySubclassViewModel(Tree,filePathReport);
     }
     private void ByTitle()
     {
         Console.WriteLine("ByTitle\n");
-        var items = AssessmentFilter.ByTitleContains(Tree, "noname");
-        
-        foreach (var a in items)
-        {
-            Console.WriteLine($"{a.Title}");
-        }
+        CurrentPage = new ByTitleContainsViewModel(Tree);
     }
     private void OnlyTests()
     {
         Console.WriteLine("OnlyTests\n");
-        var items = AssessmentFilter.OnlyTests(Tree);
-
-        foreach (var a in items)
-        {
-            Console.WriteLine($"{a.Title} - {a.DurationSeconds}");
-        }
+        CurrentPage = new OnlyTestsViewModel(Tree);
     }
     private void OnlyExams()
     {
         Console.WriteLine("OnlyExams\n");
-        var items = AssessmentFilter.OnlyExams(Tree);
-        
-        foreach (var a in items)
-        {
-            Console.WriteLine($"{a.Title} - {a.DurationSeconds}");
-        }
+        CurrentPage = new OnlyExamsViewModel(Tree);
     }
     private void OnlyFinalExams()
     {
         Console.WriteLine("OnlyFinalExams\n");
-        var items = AssessmentFilter.OnlyFinals(Tree);
-        
-        foreach (var a in items)
-        {
-            Console.WriteLine($"{a.Title} - {a.DurationSeconds}");
-        }
+         CurrentPage = new OnlyFinalExamsViewModel(Tree);
     }
     public MainWindowViewModel()
     {
         _tree = new NewAssessmentTree();
-        _journal = new Journal();
+        _journal = new JournalTxt(filePathJournal);
 
         _tree.CollectionCountChanged += _journal.CollectionCountChanged;
-        _tree.CollectionReferenceChanged+= _journal.CollectionReferenceChanged;
+        _tree.CollectionReferenceChanged += _journal.CollectionReferenceChanged;
 
         _homePage = new ();
-
-        _randomInitPage = new RandomInitViewModel(Tree);
-        _findElementPage = new FindElementViewModel(Tree);
-        _addElementPage = new AddElementViewModel(Tree);
-        _modifyElementPage = new ModifyElementViewModel(Tree);
-        _removeElementPage = new RemoveElementViewModel(Tree);
-        _minbyPage = new MinByViewModel(Tree);
-        
-
+    
         CurrentPage = _homePage;
         SaveButtonCommand = new RelayCommand(OnSaveButtonClicked);
 
@@ -336,12 +307,13 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
                 new Node("Сохранить коллекцию как", w => SaveFileCollection(w)),
                 new Node("Открыть журнал", w => OpenJournal(w)),
                 new Node("Сохранить журнал как", w => SaveJournal(w)),
+                new Node("Открыть отчет", w => OpenJournal(w)),
             }),
             new Node("Представления", subNodes: new ObservableCollection<Node>
             {
                 new Node("Главная страница", w => OpenMainPage()),
                 new Node("Показать коллекцию", w => ShowCollection()),
-                new Node("Показать отчет", w => ShowCollection()),
+                new Node("Показать отчет", w => ShowReport()),
                 new Node("Показать журнал", w => ShowJournal()),
             }),
             new Node("Коллекция", subNodes: new ObservableCollection<Node>
@@ -353,16 +325,16 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
                 new Node("Найти элемент", w => FindCollectionItem()),
                 new Node("Удалить все", w => ClearCollection()),
             }),
-            new Node("Журнал", subNodes: new ObservableCollection<Node>
-            {
-                new Node("Сохранить", w => SaveJournal(w)),
-                new Node("Удалить", w => RemoveJournal()),
-            }),
+            //new Node("Журнал", subNodes: new ObservableCollection<Node>
+            //{
+            //    new Node("Сохранить", w => SaveJournal(w)),
+            //    new Node("Удалить", w => RemoveJournal()),
+            //}),
             new Node("Запрос", subNodes: new ObservableCollection<Node>
             {
                 new Node("Минимальный по полю", w => MinBy()),
                 new Node("Максимальный по полю", w => MaxBy()),
-                new Node("Наибольшие N", w => TopN()),
+                new Node("Количество по типу", w => CountBySubclass()),
             }),
             new Node("Фильтрация", subNodes: new ObservableCollection<Node>
             {

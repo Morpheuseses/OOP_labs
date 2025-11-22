@@ -5,9 +5,8 @@ using Lib;
 
 namespace CollectionApp.ViewModels.Pages;
 
-public class RemoveElementViewModel : ViewModelBase
+public class RemoveElementViewModel : ViewModelPageBase
 {
-    private NewAssessmentTree _tree;
     private string? _title;
     public string? Title
     {
@@ -21,20 +20,8 @@ public class RemoveElementViewModel : ViewModelBase
             }
         }
     }
-    private string? _outputText;
-    public string? OutputText
-    {
-        get => _outputText;
-        set
-        {
-            if (_outputText != value)
-            {
-                _outputText = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    public ICommand RemoveElementCommand { get; }
+
+    public  ICommand RemoveElementCommand { get; }
     public RemoveElementViewModel(NewAssessmentTree tree)
     {
         _tree = tree;

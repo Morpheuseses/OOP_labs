@@ -5,13 +5,8 @@ using JournalLib;
 using ReactiveUI;
 
 namespace CollectionApp.ViewModels.Pages;
-public class ShowJournalViewModel : ViewModelBase
+public class ShowJournalViewModel : ViewModelPageBase
 {
-    private string _outputText;
-    public string OutputText 
-    {
-        get => _outputText;
-    }
     public ShowJournalViewModel(Journal journal)
     {
         _outputText = journal.ToString(); 

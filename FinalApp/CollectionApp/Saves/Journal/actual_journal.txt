@@ -1,0 +1,619 @@
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Engineering
+Date: 8/10/2026 11:25:13 PM
+Duration: 1h, 50m, 44s
+Number of questions: 23
+Number of written questions: 19
+Graduation level: PhD
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: SystemModeling
+Date: 8/16/2026 10:09:13 PM
+Duration: 1h, 37m, 52s
+Number of questions: 16
+Number of written questions: 13
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: ComputerGraphics
+Date: 7/22/2026 1:16:13 PM
+Duration: 0h, 46m, 48s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Programming
+Date: 10/17/2028 5:54:13 AM
+Duration: 0h, 13m, 39s
+Number of questions: 26
+Number of written questions: 11
+Graduation level: Master
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Physics
+Date: 12/28/2025 2:00:13 PM
+Duration: 0h, 56m, 15s
+Number of questions: 35
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: DiscreteMath
+Date: 11/18/2027 3:49:13 AM
+Duration: 4h, 49m, 9s
+Number of questions: 36
+Number of written questions: 23
+Graduation level: PhD
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Engineering_932
+Date: 12/7/2025 6:09:13 AM
+Duration: 5h, 31m, 22s
+Number of questions: 16
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: ComputerGraphics_744
+Date: 6/6/2026 8:23:13 PM
+Duration: 4h, 55m, 49s
+Number of questions: 34
+Number of written questions: 9
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: ComputerGraphics_991
+Date: 1/1/2026 10:31:13 AM
+Duration: 4h, 19m, 57s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: Programming_850
+Date: 8/21/2028 5:04:13 AM
+Duration: 3h, 20m, 39s
+
+
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: DiscreteMath
+Date: 10/20/2027 10:33:51 PM
+Duration: 3h, 22m, 48s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: OOP
+Date: 10/22/2028 12:52:51 AM
+Duration: 3h, 45m, 6s
+Number of questions: 29
+Number of written questions: 17
+Graduation level: PhD
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: DiscreteMath_874
+Date: 4/28/2027 9:02:51 PM
+Duration: 2h, 50m, 25s
+Number of questions: 7
+Number of written questions: 3
+Graduation level: PhD
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: SystemModeling
+Date: 12/22/2025 11:00:51 PM
+Duration: 2h, 15m, 52s
+Number of questions: 18
+Number of written questions: 3
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: DiscreteMath_730
+Date: 10/23/2027 6:58:51 PM
+Duration: 2h, 11m, 58s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Physics
+Date: 1/17/2027 1:01:51 PM
+Duration: 0h, 5m, 39s
+Number of questions: 11
+Number of written questions: 10
+Graduation level: Bachelor
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: OOP_273
+Date: 4/2/2027 3:03:51 PM
+Duration: 3h, 53m, 32s
+Number of questions: 9
+Number of written questions: 1
+Graduation level: Bachelor
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: SystemModeling_362
+Date: 8/2/2027 1:56:51 AM
+Duration: 5h, 50m, 20s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Physics_534
+Date: 4/26/2026 2:31:51 AM
+Duration: 3h, 16m, 12s
+Number of questions: 17
+Number of written questions: 6
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Engineering
+Date: 11/8/2026 12:28:51 AM
+Duration: 4h, 12m, 21s
+Number of questions: 24
+Number of written questions: 8
+Graduation level: PhD
+
+
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Engineering
+Date: 3/4/2027 10:47:42 AM
+Duration: 0h, 51m, 31s
+Number of questions: 30
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Engineering_261
+Date: 1/14/2028 6:03:42 PM
+Duration: 5h, 23m, 46s
+Number of questions: 2
+Number of written questions: 1
+Graduation level: Master
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: SystemModeling
+Date: 8/21/2028 2:20:42 PM
+Duration: 5h, 35m, 32s
+Number of questions: 37
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Engineering_696
+Date: 11/13/2028 8:29:42 PM
+Duration: 3h, 21m, 9s
+Number of questions: 43
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Math
+Date: 8/29/2027 8:49:42 PM
+Duration: 5h, 24m, 20s
+Number of questions: 22
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Programming
+Date: 4/11/2028 1:08:42 PM
+Duration: 4h, 21m, 58s
+Number of questions: 33
+Number of written questions: 19
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: ComputerGraphics
+Date: 4/27/2027 3:17:42 PM
+Duration: 5h, 2m, 9s
+Number of questions: 32
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: Programming_212
+Date: 5/24/2027 9:01:42 AM
+Duration: 4h, 27m, 56s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: OOP
+Date: 8/24/2027 4:10:42 PM
+Duration: 1h, 4m, 51s
+Number of questions: 49
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Programming_596
+Date: 11/26/2025 3:32:42 PM
+Duration: 2h, 42m, 54s
+Number of questions: 38
+Number of written questions: 12
+
+
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Physics
+Date: 7/5/2028 11:39:42 PM
+Duration: 0h, 57m, 15s
+Number of questions: 43
+Number of written questions: 40
+Graduation level: Master
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: ComputerGraphics
+Date: 11/20/2026 4:16:42 PM
+Duration: 5h, 7m, 43s
+Number of questions: 14
+Number of written questions: 5
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Programming
+Date: 5/30/2026 3:57:42 PM
+Duration: 5h, 20m, 14s
+Number of questions: 16
+Number of written questions: 5
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Physics_805
+Date: 3/17/2027 4:48:42 PM
+Duration: 0h, 15m, 6s
+Number of questions: 7
+Number of written questions: 3
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Engineering
+Date: 8/1/2028 5:38:42 AM
+Duration: 2h, 7m, 53s
+Number of questions: 45
+Number of written questions: 18
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: DiscreteMath
+Date: 6/4/2027 7:24:42 PM
+Duration: 5h, 40m, 40s
+Number of questions: 9
+Number of written questions: 6
+Graduation level: Bachelor
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: DiscreteMath_859
+Date: 10/23/2027 8:58:42 PM
+Duration: 3h, 42m, 49s
+Number of questions: 24
+Number of written questions: 14
+Graduation level: Bachelor
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: Engineering_19
+Date: 3/14/2027 11:02:42 PM
+Duration: 0h, 22m, 38s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Programming_726
+Date: 2/18/2027 2:48:42 AM
+Duration: 0h, 39m, 22s
+Number of questions: 47
+Number of written questions: 36
+Graduation level: Bachelor
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: OOP
+Date: 1/8/2028 4:47:42 AM
+Duration: 0h, 4m, 12s
+Number of questions: 33
+Number of written questions: 27
+Graduation level: PhD
+
+
+Collection name: Hehehoho tree
+Collection change type: Clear
+Collection object information: 
+null
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: ComputerGraphics
+Date: 7/11/2028 10:43:55 PM
+Duration: 2h, 58m, 54s
+Number of questions: 16
+Number of written questions: 15
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: Engineering
+Date: 3/8/2028 9:12:55 AM
+Duration: 4h, 14m, 54s
+Number of questions: 22
+Number of written questions: 3
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Physics
+Date: 7/8/2026 11:13:55 PM
+Duration: 5h, 15m, 28s
+Number of questions: 31
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: ComputerGraphics_689
+Date: 10/9/2027 9:23:55 PM
+Duration: 4h, 7m, 22s
+Number of questions: 46
+Number of written questions: 26
+Graduation level: Bachelor
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: Engineering_954
+Date: 10/28/2028 6:04:55 PM
+Duration: 5h, 32m, 34s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: Programming
+Date: 12/9/2027 9:41:55 AM
+Duration: 2h, 22m, 53s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Assessment
+Title: ComputerGraphics_225
+Date: 8/9/2028 4:08:55 PM
+Duration: 3h, 26m, 55s
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: FinalExam
+Title: Math
+Date: 9/28/2027 6:51:55 AM
+Duration: 5h, 47m, 37s
+Number of questions: 46
+Number of written questions: 6
+Graduation level: Master
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Test
+Title: Math_990
+Date: 4/18/2028 11:05:55 PM
+Duration: 5h, 53m, 49s
+Number of questions: 28
+
+
+Collection name: Hehehoho tree
+Collection change type: inserted
+Collection object information: 
+------------------------------------
+Object Type: Exam
+Title: OOP
+Date: 9/2/2026 12:49:55 PM
+Duration: 1h, 3m, 43s
+Number of questions: 43
+Number of written questions: 26
+
+

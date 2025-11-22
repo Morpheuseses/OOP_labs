@@ -6,9 +6,8 @@ using Lib;
 using System.Threading;
 
 namespace CollectionApp.ViewModels.Pages;
-public class AddElementViewModel : ViewModelBase
+public class AddElementViewModel : ViewModelPageBase
 {
-    private NewAssessmentTree _tree;
 
     public string Title { get; set; }
     public DateTime Date { get; set; }
@@ -31,25 +30,12 @@ public class AddElementViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _selectedDegree, value);
     }
 
-    private string _errorMessage = "";
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set 
-        { 
-            this.RaiseAndSetIfChanged(ref _errorMessage, value);
-            OnPropertyChanged();
-        }
-    }
-
     public RelayCommand SaveCommand { get; }
-    public RelayCommand SaveRandomCommand { get; }
 
     public AddElementViewModel(NewAssessmentTree tree)
     {
         _tree = tree;
         SaveCommand = new RelayCommand(SaveElement);
-        SaveRandomCommand = new RelayCommand(SaveRandomElement);
     }
 
     private void SaveElement()
@@ -109,10 +95,6 @@ public class AddElementViewModel : ViewModelBase
             ErrorMessage = $"Ошибка при создании элемента: {ex.Message}";
         }
         
-    }
-    private void SaveRandomElement()
-    {
-        Console.WriteLine("Добавлен случайный элемент");
     }
     
 }

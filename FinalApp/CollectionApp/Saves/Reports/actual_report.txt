@@ -1,0 +1,205 @@
+MinBy 11/22/2025 2:41:58 AM
+
+------------------------------------
+Object Type: Assessment
+Title: DiscreteMath
+Date: 10/20/2027 10:33:51 PM
+Duration: 3h, 22m, 48s
+
+MinBy 11/22/2025 2:42:06 AM
+
+------------------------------------
+Object Type: Exam
+Title: SystemModeling
+Date: 12/22/2025 11:00:51 PM
+Duration: 2h, 15m, 52s
+Number of questions: 18
+Number of written questions: 3
+
+MinBy 11/22/2025 2:42:08 AM
+
+------------------------------------
+Object Type: FinalExam
+Title: Physics
+Date: 1/17/2027 1:01:51 PM
+Duration: 0h, 5m, 39s
+Number of questions: 11
+Number of written questions: 10
+Graduation level: Bachelor
+
+MaxBy 11/22/2025 2:53:50 AM
+
+------------------------------------
+Object Type: Test
+Title: ComputerGraphics
+Date: 4/27/2027 3:17:42 PM
+Duration: 5h, 2m, 9s
+Number of questions: 32
+
+MaxBy 11/22/2025 2:53:52 AM
+
+------------------------------------
+Object Type: Exam
+Title: Programming_596
+Date: 11/26/2025 3:32:42 PM
+Duration: 2h, 42m, 54s
+Number of questions: 38
+Number of written questions: 12
+
+MaxBy 11/22/2025 2:53:54 AM
+
+------------------------------------
+Object Type: Test
+Title: Engineering
+Date: 3/4/2027 10:47:42 AM
+Duration: 0h, 51m, 31s
+Number of questions: 30
+
+MaxBy 11/22/2025 2:54:02 AM
+
+------------------------------------
+Object Type: Test
+Title: Engineering
+Date: 3/4/2027 10:47:42 AM
+Duration: 0h, 51m, 31s
+Number of questions: 30
+
+MinBy 11/22/2025 2:54:47 AM
+
+------------------------------------
+Object Type: Exam
+Title: ComputerGraphics
+Date: 11/20/2026 4:16:42 PM
+Duration: 5h, 7m, 43s
+Number of questions: 14
+Number of written questions: 5
+
+MinBy 11/22/2025 2:54:49 AM
+
+------------------------------------
+Object Type: Exam
+Title: Programming
+Date: 5/30/2026 3:57:42 PM
+Duration: 5h, 20m, 14s
+Number of questions: 16
+Number of written questions: 5
+
+MaxBy 11/22/2025 2:54:51 AM
+
+------------------------------------
+Object Type: FinalExam
+Title: OOP
+Date: 1/8/2028 4:47:42 AM
+Duration: 0h, 4m, 12s
+Number of questions: 33
+Number of written questions: 27
+Graduation level: PhD
+
+MaxBy 11/22/2025 2:55:09 AM
+
+FinalExam - 5
+Exam - 4
+Assessment - 1
+
+MaxBy 11/22/2025 2:55:10 AM
+
+Тип испытания - количество:
+FinalExam - 5
+Exam - 4
+Assessment - 1
+FinalExam - 5
+Exam - 4
+Assessment - 1
+
+MaxBy 11/22/2025 2:55:11 AM
+
+Тип испытания - количество:
+Тип испытания - количество:
+FinalExam - 5
+Exam - 4
+Assessment - 1
+FinalExam - 5
+Exam - 4
+Assessment - 1
+FinalExam - 5
+Exam - 4
+Assessment - 1
+
+MaxBy 11/22/2025 2:55:17 AM
+
+Тип испытания - количество:
+Тип испытания - количество:
+Тип испытания - количество:
+FinalExam - 5
+Exam - 4
+Assessment - 1
+FinalExam - 5
+Exam - 4
+Assessment - 1
+FinalExam - 5
+Exam - 4
+Assessment - 1
+FinalExam - 5
+Exam - 4
+Assessment - 1
+
+MinBy 11/22/2025 2:55:59 AM
+
+------------------------------------
+Object Type: Exam
+Title: ComputerGraphics
+Date: 7/11/2028 10:43:55 PM
+Duration: 2h, 58m, 54s
+Number of questions: 16
+Number of written questions: 15
+
+MaxBy 11/22/2025 2:56:03 AM
+
+------------------------------------
+Object Type: Exam
+Title: OOP
+Date: 9/2/2026 12:49:55 PM
+Duration: 1h, 3m, 43s
+Number of questions: 43
+Number of written questions: 26
+
+MaxBy 11/22/2025 2:56:05 AM
+
+------------------------------------
+Object Type: Exam
+Title: ComputerGraphics
+Date: 7/11/2028 10:43:55 PM
+Duration: 2h, 58m, 54s
+Number of questions: 16
+Number of written questions: 15
+
+MaxBy 11/22/2025 2:56:06 AM
+
+------------------------------------
+Object Type: Test
+Title: Physics
+Date: 7/8/2026 11:13:55 PM
+Duration: 5h, 15m, 28s
+Number of questions: 31
+
+MaxBy 11/22/2025 2:56:08 AM
+
+Exam - 3
+FinalExam - 2
+Assessment - 3
+Test - 2
+
+MaxBy 11/22/2025 2:56:09 AM
+
+Exam - 3
+FinalExam - 2
+Assessment - 3
+Test - 2
+
+MaxBy 11/22/2025 2:56:10 AM
+
+Exam - 3
+FinalExam - 2
+Assessment - 3
+Test - 2
+

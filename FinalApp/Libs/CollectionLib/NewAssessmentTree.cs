@@ -42,7 +42,7 @@ public class NewAssessmentTree : BinarySearchTree<Assessment>
     }
     public override void Clear()
     {
-        OnCollectionCountChanged(this, new NewAssessmentTreeEventArgs(Name, "Clear", null));
+        OnCollectionCountChanged(this, new NewAssessmentTreeEventArgs(Name, "clear", null));
         base.Clear();
     }
 }

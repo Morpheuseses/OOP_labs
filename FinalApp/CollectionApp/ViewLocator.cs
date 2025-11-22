@@ -12,16 +12,12 @@ namespace CollectionApp
             if (data == null)
                 return new TextBlock { Text = "No data" };
 
-            // Получаем полное имя ViewModel
             var viewModelFullName = data.GetType().FullName!;
 
-            // Заменяем namespace ViewModel на namespace View
-            // И убираем суффикс "ViewModel"
             var viewFullName = viewModelFullName
                                 .Replace("CollectionApp.ViewModels.Pages", "CollectionApp.Views.Pages")
                                 .Replace("ViewModel", "");
 
-            // Ищем тип View
             var type = Type.GetType(viewFullName);
 
             if (type != null)

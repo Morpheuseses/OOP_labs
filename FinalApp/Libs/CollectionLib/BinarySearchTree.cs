@@ -19,6 +19,7 @@ namespace CollectionLib
         public BinarySearchTree()
         {
             RootNode = null;
+            Comparer = Comparer<T>.Default;
         }
 
         public BinarySearchTree(IComparer<T>? comparer)
@@ -29,6 +30,7 @@ namespace CollectionLib
         public BinarySearchTree(T[] collection)
         {
             RootNode = null;
+            Comparer = Comparer<T>.Default;
             AddRange(collection);
         }
 
@@ -56,14 +58,16 @@ namespace CollectionLib
         public virtual void Add(T data)
         {
             RootNode = Add(RootNode, data);
-            Count++;
+            
         }
 
         private TreeNode<T> Add(TreeNode<T>? node, T data)
         {
             if (node == null)
+            {
+                Count++;
                 return new TreeNode<T>(data);
-
+            }
             int compResult = data.CompareTo(node.Data);
             if (compResult < 0)
                 node.Left = Add(node.Left, data);
@@ -91,14 +95,17 @@ namespace CollectionLib
                 return false;
 
             RootNode = Remove(data, RootNode);
-            Count--;
+            
             return true;
         }
 
         private TreeNode<T> Remove(T data, TreeNode<T>? node)
         {
             if (node == null)
+            {
+                Count--;
                 return null;
+            }
 
             int comparison = data.CompareTo(node.Data);
             if (comparison < 0)

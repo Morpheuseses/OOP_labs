@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CollectionApp.ViewModels.Pages"
+             x:Class="CollectionApp.Views.Pages.ShowReport"
+             x:DataType="vm:ShowReportViewModel">
+
+    <Grid RowDefinitions="Auto,*" Margin="20">
+        <TextBlock Grid.Row="0"
+                   Text="Содержимое отчета(по запросам)"
+                   Foreground="{DynamicResource PrimaryForeground}"
+                   FontSize="25"/>
+
+        <ScrollViewer Grid.Row="1">
+            <TextBlock Text="{Binding OutputText}"
+                       Foreground="{DynamicResource PrimaryForeground}"
+                       FontSize="14"
+                       TextWrapping="Wrap"/>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -4,10 +4,9 @@ using Lib;
 
 namespace JournalLib;
 
-[Serializable]
 public class Journal
 {
-    private List<JournalEntry> entries;
+    protected List<JournalEntry> entries;
     public class JournalEntry
     {
         public string Name { get; }
@@ -30,12 +29,13 @@ public class Journal
     {
         entries = new List<JournalEntry>();
     }
-    public void CollectionCountChanged(object source, NewAssessmentTreeEventArgs args)
+    public virtual void CollectionCountChanged(object source, NewAssessmentTreeEventArgs args)
     {
         var objectInfo = args.Object?.ToString() ?? "null";
         entries.Add(new JournalEntry(args.Name, args.EventType, objectInfo));
+
     }
-    public void CollectionReferenceChanged(object source, NewAssessmentTreeEventArgs args)
+    public virtual void CollectionReferenceChanged(object source, NewAssessmentTreeEventArgs args)
     {
         var objectInfo = args.Object?.ToString() ?? "null";
         entries.Add(new JournalEntry(args.Name, args.EventType, objectInfo));
@@ -43,12 +43,10 @@ public class Journal
     public override string ToString()
     {
         string result = "";
-        result += "\tJournal start\n";
         foreach (JournalEntry entry in this.entries)
         {
             result += entry.ToString() + '\n';
         }
-        result += "\tJournal End\n";
         return result;
     }
 }

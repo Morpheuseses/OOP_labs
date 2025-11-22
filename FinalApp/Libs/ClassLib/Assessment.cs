@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace Lib;
 
 // test, Assessment, exam, final exam

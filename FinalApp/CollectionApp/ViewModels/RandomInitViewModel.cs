@@ -4,10 +4,8 @@ using Lib;
 using ReactiveUI;
 
 namespace CollectionApp.ViewModels.Pages;
-public class RandomInitViewModel : ViewModelBase
-{
-    private NewAssessmentTree _tree;
-    
+public class RandomInitViewModel : ViewModelPageBase
+{   
     private int _count;
     public int Count 
     {
@@ -26,7 +24,7 @@ public class RandomInitViewModel : ViewModelBase
         RandomInitCommand = new RelayCommand(RandomInit);
     }
     
-    public void RandomInit()
+    private void RandomInit()
     {
         if (Count <= 0)
         {

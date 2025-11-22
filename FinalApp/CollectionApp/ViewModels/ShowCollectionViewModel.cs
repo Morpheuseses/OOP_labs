@@ -4,18 +4,8 @@ using Lib;
 using ReactiveUI;
 
 namespace CollectionApp.ViewModels.Pages;
-public class ShowCollectionViewModel : ViewModelBase
+public class ShowCollectionViewModel : ViewModelPageBase
 {
-    private string _outputText;
-    public string OutputText 
-    {
-        get => _outputText;
-        set
-        {
-            _outputText = value;
-            OnPropertyChanged();
-        }
-    }
     public ShowCollectionViewModel(NewAssessmentTree tree)
     {
         if (tree.Length != 0)
